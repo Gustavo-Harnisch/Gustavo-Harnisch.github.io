@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pong</title>
-  <!-- Llamamos al CSS externo -->
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Pong Retro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <div id="gameArea">
+    <h1>PONG</h1>
+    <!-- Aquí irían los elementos del juego, por ejemplo: -->
+    <canvas id="pongCanvas" width="600" height="400"></canvas>
+    <!-- Puedes agregar instrucciones, puntajes, etc. -->
+    <p>Puntaje: <span id="score">0 - 0</span></p>
+  </div>
   <script src="pong.js"></script>
 </body>
 </html>
