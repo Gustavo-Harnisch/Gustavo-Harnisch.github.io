@@ -1,15 +1,30 @@
 body {
-    background: #222;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center, #1a1a1a 0%, #111 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
 }
 
 #pong {
-    background: #111;
-    display: block;
-    box-shadow: 0 0 20px #000;
-    border: 2px solid #fff;
+  background: linear-gradient(160deg, #0c0c0c 0%, #1a1a1a 100%);
+  display: block;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  box-shadow: 
+    0 0 30px rgba(0, 255, 255, 0.2), 
+    0 0 60px rgba(0, 255, 255, 0.1) inset,
+    0 0 10px #000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#pong:hover {
+  transform: scale(1.02);
+  box-shadow: 
+    0 0 40px rgba(0, 255, 255, 0.4), 
+    0 0 80px rgba(0, 255, 255, 0.2) inset,
+    0 0 15px #000;
 }
