@@ -1,4 +1,4 @@
-
+ 
 const PADDLE_WIDTH = 15;
 const PADDLE_HEIGHT = 100;
 const PADDLE_SPEED = 7;
