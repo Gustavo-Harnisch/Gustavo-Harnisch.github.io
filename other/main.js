@@ -63,18 +63,35 @@ function resetBall() {
   ballVY = 4 * (Math.random() > 0.5 ? 1 : -1);
 }
 
+// Rebote con ángulo aleatorio en los frames superior e inferior
+function randomBounceAngle(isTop) {
+  // Ángulo entre 30° y 60° en radianes
+  const minDeg = 30, maxDeg = 60;
+  const min = minDeg * Math.PI / 180;
+  const max = maxDeg * Math.PI / 180;
+  let theta = Math.random() * (max - min) + min;
+  // A la derecha o izquierda según el sentido actual
+  const horizontalSign = Math.sign(ballVX) || (Math.random() > 0.5 ? 1 : -1);
+  // Hacia abajo si rebota arriba, hacia arriba si rebota abajo
+  const verticalSign = isTop ? 1 : -1;
+  // Mantener la velocidad de la bola
+  const speed = Math.sqrt(ballVX * ballVX + ballVY * ballVY);
+  ballVX = horizontalSign * Math.cos(theta) * speed;
+  ballVY = verticalSign * Math.sin(theta) * speed;
+}
+
 function updateBall() {
   ballX += ballVX;
   ballY += ballVY;
 
-  // Rebote en los bordes superior e inferior
+  // Rebote en los bordes superior e inferior CON ÁNGULO ALEATORIO
   if (ballY - ballRadius < 0) {
     ballY = ballRadius;
-    ballVY *= -1;
+    randomBounceAngle(true); // rebota hacia abajo
   }
   if (ballY + ballRadius > canvas.height) {
     ballY = canvas.height - ballRadius;
-    ballVY *= -1;
+    randomBounceAngle(false); // rebota hacia arriba
   }
 
   // Rebote en paddle izquierdo
@@ -83,7 +100,7 @@ function updateBall() {
     ballY > leftPaddleY &&
     ballY < leftPaddleY + paddleHeight
   ) {
-    ballX = paddleWidth + ballRadius; // Corrige el atasco
+    ballX = paddleWidth + ballRadius;
     ballVX *= -1;
   }
 
@@ -93,7 +110,7 @@ function updateBall() {
     ballY > rightPaddleY &&
     ballY < rightPaddleY + paddleHeight
   ) {
-    ballX = canvas.width - paddleWidth - ballRadius; // Corrige el atasco
+    ballX = canvas.width - paddleWidth - ballRadius;
     ballVX *= -1;
   }
 
@@ -115,8 +132,6 @@ function updateRightPaddleAI() {
   const paddleCenter = rightPaddleY + paddleHeight / 2;
   if (paddleCenter < ballY - 15) rightPaddleY += paddleSpeed;
   else if (paddleCenter > ballY + 15) rightPaddleY -= paddleSpeed;
-
-  // Limita dentro del canvas
   rightPaddleY = Math.max(Math.min(rightPaddleY, canvas.height - paddleHeight), 0);
 }
 
@@ -128,10 +143,9 @@ function updateLeftPaddle() {
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   drawNet();
-  drawPaddle(0, leftPaddleY); // left paddle
-  drawPaddle(canvas.width - paddleWidth, rightPaddleY); // right paddle
+  drawPaddle(0, leftPaddleY);
+  drawPaddle(canvas.width - paddleWidth, rightPaddleY);
   drawBall();
   drawScore();
 }
@@ -144,7 +158,6 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
-// Controles teclado
 document.addEventListener('keydown', function(e) {
   if (e.code === 'ArrowUp') upPressed = true;
   if (e.code === 'ArrowDown') downPressed = true;
