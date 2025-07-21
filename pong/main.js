@@ -1,4 +1,4 @@
-// 🎯 Configuración
+// ⚙️ Configuración
 const PADDLE_WIDTH = 15;
 const PADDLE_HEIGHT = 100;
 const PADDLE_SPEED = 7;
@@ -11,7 +11,7 @@ const MAX_BOUNCE_ANGLE = 60 * Math.PI / 180;
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// Estado del juego
+// Estado inicial
 let leftPaddleY = (canvas.height - PADDLE_HEIGHT) / 2;
 let rightPaddleY = (canvas.height - PADDLE_HEIGHT) / 2;
 let ballX = canvas.width / 2;
@@ -24,7 +24,7 @@ let downPressed = false;
 let leftScore = 0;
 let rightScore = 0;
 
-// ✅ Helpers
+// 🛠️ Helpers
 function getRandomDirection(speed) {
   return speed * (Math.random() > 0.5 ? 1 : -1);
 }
@@ -74,7 +74,7 @@ function drawFrame() {
   drawScore();
 }
 
-// ⚡ Lógica
+// 🔄 Lógica
 function resetBall() {
   ballX = canvas.width / 2;
   ballY = canvas.height / 2;
@@ -88,15 +88,26 @@ function applyRandomBounce(isTop) {
   const horizontalSign = Math.sign(ballVX) || getRandomDirection(1);
   const verticalSign = isTop ? 1 : -1;
 
-  ballVX = horizontalSign * Math.cos(angle) * speed;
-  ballVY = verticalSign * Math.sin(angle) * speed;
+  ballVX = Math.cos(angle) * speed * horizontalSign;
+  ballVY = Math.sin(angle) * speed * verticalSign;
+}
+
+// 🚀 Aumentar velocidad de la bola en cada golpe
+function increaseBallSpeed() {
+  const factor = 1.05; // 5% más rápido por golpe
+  const speed = Math.hypot(ballVX, ballVY);
+  const newSpeed = speed * factor;
+  const angle = Math.atan2(ballVY, ballVX);
+
+  ballVX = Math.cos(angle) * newSpeed;
+  ballVY = Math.sin(angle) * newSpeed;
 }
 
 function updateBall() {
   ballX += ballVX;
   ballY += ballVY;
 
-  // Bordes verticales
+  // Bordes superior e inferior
   if (ballY - BALL_RADIUS < 0) {
     ballY = BALL_RADIUS;
     applyRandomBounce(true);
@@ -106,13 +117,70 @@ function updateBall() {
     applyRandomBounce(false);
   }
 
-  // Rebote izquierda
-  if (ballX - BALL_RADIUS < PADDLE_WIDTH &&
-      ballY > leftPaddleY && ballY < leftPaddleY + PADDLE_HEIGHT) {
+  // Rebote en paddle izquierdo
+  if (
+    ballX - BALL_RADIUS < PADDLE_WIDTH &&
+    ballY > leftPaddleY &&
+    ballY < leftPaddleY + PADDLE_HEIGHT
+  ) {
     ballX = PADDLE_WIDTH + BALL_RADIUS;
     ballVX *= -1;
+    increaseBallSpeed(); // 🎯 Aumentar velocidad
   }
 
-  // Rebote derecha
-  if (ballX + BALL_RADIUS > canvas.width - PADDLE_WIDTH &&
-      ballY > rightPaddleY && bal
+  // Rebote en paddle derecho
+  if (
+    ballX + BALL_RADIUS > canvas.width - PADDLE_WIDTH &&
+    ballY > rightPaddleY &&
+    ballY < rightPaddleY + PADDLE_HEIGHT
+  ) {
+    ballX = canvas.width - PADDLE_WIDTH - BALL_RADIUS;
+    ballVX *= -1;
+    increaseBallSpeed(); // 🎯 Aumentar velocidad
+  }
+
+  // Puntos
+  if (ballX - BALL_RADIUS < 0) {
+    rightScore++;
+    resetBall();
+  }
+  if (ballX + BALL_RADIUS > canvas.width) {
+    leftScore++;
+    resetBall();
+  }
+}
+
+function updateLeftPaddle() {
+  if (upPressed) leftPaddleY -= PADDLE_SPEED;
+  if (downPressed) leftPaddleY += PADDLE_SPEED;
+  leftPaddleY = clamp(leftPaddleY, 0, canvas.height - PADDLE_HEIGHT);
+}
+
+function updateRightPaddle() {
+  const center = rightPaddleY + PADDLE_HEIGHT / 2;
+  if (center < ballY - 15) rightPaddleY += PADDLE_SPEED;
+  if (center > ballY + 15) rightPaddleY -= PADDLE_SPEED;
+  rightPaddleY = clamp(rightPaddleY, 0, canvas.height - PADDLE_HEIGHT);
+}
+
+// 🎮 Controles
+document.addEventListener('keydown', e => {
+  if (e.code === 'ArrowUp') upPressed = true;
+  if (e.code === 'ArrowDown') downPressed = true;
+});
+document.addEventListener('keyup', e => {
+  if (e.code === 'ArrowUp') upPressed = false;
+  if (e.code === 'ArrowDown') downPressed = false;
+});
+
+// 🏃‍♂️ Bucle principal
+function gameLoop() {
+  updateLeftPaddle();
+  updateRightPaddle();
+  updateBall();
+  drawFrame();
+  requestAnimationFrame(gameLoop);
+}
+
+// ▶️ Iniciar juego
+gameLoop();
