@@ -1,4 +1,4 @@
-// ⚙️ Configuración
+// ⚙️ CONFIGURACIÓN DEL JUEGO
 const PADDLE_WIDTH = 15;
 const PADDLE_HEIGHT = 100;
 const PADDLE_SPEED = 7;
@@ -11,21 +11,21 @@ const MAX_BOUNCE_ANGLE = 60 * Math.PI / 180;
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// Estado inicial
+// 🎮 ESTADO INICIAL
 let leftPaddleY = (canvas.height - PADDLE_HEIGHT) / 2;
 let rightPaddleY = (canvas.height - PADDLE_HEIGHT) / 2;
 let ballX = canvas.width / 2;
 let ballY = canvas.height / 2;
-let ballVX = getRandomDirection(INITIAL_BALL_SPEED_X);
-let ballVY = getRandomDirection(INITIAL_BALL_SPEED_Y);
+let ballVX = randomDirection(INITIAL_BALL_SPEED_X);
+let ballVY = randomDirection(INITIAL_BALL_SPEED_Y);
 
 let upPressed = false;
 let downPressed = false;
 let leftScore = 0;
 let rightScore = 0;
 
-// 🛠️ Helpers
-function getRandomDirection(speed) {
+// 🛠️ FUNCIONES AUXILIARES
+function randomDirection(speed) {
   return speed * (Math.random() > 0.5 ? 1 : -1);
 }
 
@@ -33,7 +33,7 @@ function clamp(value, min, max) {
   return Math.max(min, Math.min(value, max));
 }
 
-// 🎨 Dibujo
+// 🎨 FUNCIONES DE DIBUJO
 function drawPaddle(x, y) {
   ctx.fillStyle = "#fff";
   ctx.fillRect(x, y, PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -54,7 +54,7 @@ function drawNet() {
   ctx.moveTo(canvas.width / 2, 0);
   ctx.lineTo(canvas.width / 2, canvas.height);
   ctx.stroke();
-  ctx.setLineDash([]);
+  ctx.setLineDash([]); // se resetea
 }
 
 function drawScore() {
@@ -74,27 +74,26 @@ function drawFrame() {
   drawScore();
 }
 
-// 🔄 Lógica
+// 🔄 LÓGICA DEL JUEGO
 function resetBall() {
   ballX = canvas.width / 2;
   ballY = canvas.height / 2;
-  ballVX = getRandomDirection(INITIAL_BALL_SPEED_X);
-  ballVY = getRandomDirection(INITIAL_BALL_SPEED_Y);
+  ballVX = randomDirection(INITIAL_BALL_SPEED_X);
+  ballVY = randomDirection(INITIAL_BALL_SPEED_Y);
 }
 
 function applyRandomBounce(isTop) {
   const angle = Math.random() * (MAX_BOUNCE_ANGLE - MIN_BOUNCE_ANGLE) + MIN_BOUNCE_ANGLE;
   const speed = Math.hypot(ballVX, ballVY);
-  const horizontalSign = Math.sign(ballVX) || getRandomDirection(1);
+  const horizontalSign = Math.sign(ballVX) || randomDirection(1);
   const verticalSign = isTop ? 1 : -1;
 
   ballVX = Math.cos(angle) * speed * horizontalSign;
   ballVY = Math.sin(angle) * speed * verticalSign;
 }
 
-// 🚀 Aumentar velocidad de la bola en cada golpe
 function increaseBallSpeed() {
-  const factor = 1.05; // 5% más rápido por golpe
+  const factor = 1.05; // aumenta un 5% en cada golpe
   const speed = Math.hypot(ballVX, ballVY);
   const newSpeed = speed * factor;
   const angle = Math.atan2(ballVY, ballVX);
@@ -107,11 +106,12 @@ function updateBall() {
   ballX += ballVX;
   ballY += ballVY;
 
-  // Bordes superior e inferior
+  // Rebote arriba
   if (ballY - BALL_RADIUS < 0) {
     ballY = BALL_RADIUS;
     applyRandomBounce(true);
   }
+  // Rebote abajo
   if (ballY + BALL_RADIUS > canvas.height) {
     ballY = canvas.height - BALL_RADIUS;
     applyRandomBounce(false);
@@ -125,7 +125,7 @@ function updateBall() {
   ) {
     ballX = PADDLE_WIDTH + BALL_RADIUS;
     ballVX *= -1;
-    increaseBallSpeed(); // 🎯 Aumentar velocidad
+    increaseBallSpeed(); // 🔥 aumenta velocidad
   }
 
   // Rebote en paddle derecho
@@ -136,14 +136,15 @@ function updateBall() {
   ) {
     ballX = canvas.width - PADDLE_WIDTH - BALL_RADIUS;
     ballVX *= -1;
-    increaseBallSpeed(); // 🎯 Aumentar velocidad
+    increaseBallSpeed(); // 🔥 aumenta velocidad
   }
 
-  // Puntos
+  // Gol para derecha
   if (ballX - BALL_RADIUS < 0) {
     rightScore++;
     resetBall();
   }
+  // Gol para izquierda
   if (ballX + BALL_RADIUS > canvas.width) {
     leftScore++;
     resetBall();
@@ -163,7 +164,7 @@ function updateRightPaddle() {
   rightPaddleY = clamp(rightPaddleY, 0, canvas.height - PADDLE_HEIGHT);
 }
 
-// 🎮 Controles
+// 🎮 CONTROLES
 document.addEventListener('keydown', e => {
   if (e.code === 'ArrowUp') upPressed = true;
   if (e.code === 'ArrowDown') downPressed = true;
@@ -173,7 +174,7 @@ document.addEventListener('keyup', e => {
   if (e.code === 'ArrowDown') downPressed = false;
 });
 
-// 🏃‍♂️ Bucle principal
+// ▶️ BUCLE PRINCIPAL
 function gameLoop() {
   updateLeftPaddle();
   updateRightPaddle();
@@ -182,5 +183,4 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
-// ▶️ Iniciar juego
 gameLoop();
