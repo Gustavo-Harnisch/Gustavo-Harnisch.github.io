@@ -1,4 +1,4 @@
-// ⚙️ CONFIGURACIÓN DEL JUEGO
+
 const PADDLE_WIDTH = 15;
 const PADDLE_HEIGHT = 100;
 const PADDLE_SPEED = 7;
@@ -11,7 +11,6 @@ const MAX_BOUNCE_ANGLE = 60 * Math.PI / 180;
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// 🎮 ESTADO INICIAL
 let leftPaddleY = (canvas.height - PADDLE_HEIGHT) / 2;
 let rightPaddleY = (canvas.height - PADDLE_HEIGHT) / 2;
 let ballX = canvas.width / 2;
@@ -24,7 +23,6 @@ let downPressed = false;
 let leftScore = 0;
 let rightScore = 0;
 
-// 🛠️ FUNCIONES AUXILIARES
 function randomDirection(speed) {
   return speed * (Math.random() > 0.5 ? 1 : -1);
 }
@@ -33,7 +31,6 @@ function clamp(value, min, max) {
   return Math.max(min, Math.min(value, max));
 }
 
-// 🎨 FUNCIONES DE DIBUJO
 function drawPaddle(x, y) {
   ctx.fillStyle = "#fff";
   ctx.fillRect(x, y, PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -74,7 +71,6 @@ function drawFrame() {
   drawScore();
 }
 
-// 🔄 LÓGICA DEL JUEGO
 function resetBall() {
   ballX = canvas.width / 2;
   ballY = canvas.height / 2;
@@ -125,7 +121,7 @@ function updateBall() {
   ) {
     ballX = PADDLE_WIDTH + BALL_RADIUS;
     ballVX *= -1;
-    increaseBallSpeed(); // 🔥 aumenta velocidad
+    increaseBallSpeed();
   }
 
   // Rebote en paddle derecho
@@ -136,7 +132,7 @@ function updateBall() {
   ) {
     ballX = canvas.width - PADDLE_WIDTH - BALL_RADIUS;
     ballVX *= -1;
-    increaseBallSpeed(); // 🔥 aumenta velocidad
+    increaseBallSpeed();
   }
 
   // Gol para derecha
@@ -164,7 +160,7 @@ function updateRightPaddle() {
   rightPaddleY = clamp(rightPaddleY, 0, canvas.height - PADDLE_HEIGHT);
 }
 
-// 🎮 CONTROLES
+
 document.addEventListener('keydown', e => {
   if (e.code === 'ArrowUp') upPressed = true;
   if (e.code === 'ArrowDown') downPressed = true;
@@ -174,7 +170,6 @@ document.addEventListener('keyup', e => {
   if (e.code === 'ArrowDown') downPressed = false;
 });
 
-// ▶️ BUCLE PRINCIPAL
 function gameLoop() {
   updateLeftPaddle();
   updateRightPaddle();
