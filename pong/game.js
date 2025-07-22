@@ -15,7 +15,7 @@ const FPS = 60;
 // Speed constants
 const INITIAL_SPEED = 5;
 const SPEED_INCREMENT = 0.9;
-const MAX_SPEED = 20;
+const MAX_SPEED = 30;
 
 // Game state
 let playerScore = 0;
