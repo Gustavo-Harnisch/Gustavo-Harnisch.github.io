@@ -1,18 +1,16 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Pong Retro</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Pong Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="gameArea">
-    <h1>PONG</h1>
-    <!-- Aquí irían los elementos del juego, por ejemplo: -->
-    <canvas id="pongCanvas" width="600" height="400"></canvas>
-    <!-- Puedes agregar instrucciones, puntajes, etc. -->
-    <p>Puntaje: <span id="score">0 - 0</span></p>
-  </div>
-  <script src="main.js"></script>
+    <canvas id="pong" width="800" height="500"></canvas>
+    <script src="game.js"></script>
 </body>
 </html>
