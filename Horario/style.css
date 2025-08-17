@@ -1,0 +1,58 @@
+/* Fondo general oscuro */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #1e1e1e; /* gris oscuro */
+  color: #e0e0e0; /* gris claro para el texto */
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #f0f0f0;
+}
+
+/* Contenedor de las clases */
+.horario {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px; /* más espacio entre boxes */
+  margin-top: 20px;
+}
+
+/* Cada tarjeta (box) */
+.clase {
+  background-color: #2b2b2b; /* gris intermedio */
+  padding: 20px;
+  border-radius: 12px;        /* bordes más suaves */
+  border: 1px solid #3d3d3d; /* borde sutil gris */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4); /* sombra suave */
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+/* Título dentro de cada box */
+.clase h3 {
+  margin: 0 0 8px;
+  color: #ffffff;
+}
+
+/* Hover para resaltar el box */
+.clase:hover {
+  background-color: #383838;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.6);
+}
+
+/* Responsive: en pantallas grandes usar dos columnas */
+@media (min-width: 600px) {
+  .horario {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Extra opcional: tres columnas en pantallas muy anchas */
+@media (min-width: 1000px) {
+  .horario {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
