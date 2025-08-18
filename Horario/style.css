@@ -1,58 +1,102 @@
-/* Fondo general oscuro */
+/* style_days_dark_quantico.css — Horario oscuro con fuente Quantico */
+
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #1e1e1e; /* gris oscuro */
-  color: #e0e0e0; /* gris claro para el texto */
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: "Quantico", sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 0;
 }
 
-h1 {
-  text-align: center;
-  color: #f0f0f0;
+#horario {
+  width: 100%;
+  padding: 1rem;
 }
 
-/* Contenedor de las clases */
-.horario {
+.horario-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px; /* más espacio entre boxes */
-  margin-top: 20px;
+  grid-template-columns: repeat(5, minmax(180px, 1fr));
+  gap: 1rem;
 }
 
-/* Cada tarjeta (box) */
+.dia-col {
+  background: #1e1e1e;
+  border-radius: 16px;
+  padding: 0.75rem;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.dia-titulo {
+  font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+  color: #f0f0f0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 0.25rem;
+}
+
+.dia-vacio {
+  margin: 0.25rem 0 0 0;
+  opacity: 0.6;
+  color: #aaa;
+}
+
 .clase {
-  background-color: #2b2b2b; /* gris intermedio */
-  padding: 20px;
-  border-radius: 12px;        /* bordes más suaves */
-  border: 1px solid #3d3d3d; /* borde sutil gris */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4); /* sombra suave */
-  transition: transform 0.2s, box-shadow 0.3s;
+  background: #2a2a2a;
+  border-radius: 14px;
+  padding: 0.6rem 0.7rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.07);
+  margin-bottom: 0.6rem;
 }
 
-/* Título dentro de cada box */
 .clase h3 {
-  margin: 0 0 8px;
-  color: #ffffff;
+  margin: 0 0 0.25rem 0;
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 700;
 }
 
-/* Hover para resaltar el box */
-.clase:hover {
-  background-color: #383838;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.6);
+.clase-meta {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.75;
+  color: #bbb;
 }
 
-/* Responsive: en pantallas grandes usar dos columnas */
-@media (min-width: 600px) {
-  .horario {
-    grid-template-columns: repeat(2, 1fr);
+/* Font helper classes */
+.quantico-regular {
+  font-family: "Quantico", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.quantico-bold {
+  font-family: "Quantico", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.quantico-regular-italic {
+  font-family: "Quantico", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.quantico-bold-italic {
+  font-family: "Quantico", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* Responsive: en móviles, 1 columna */
+@media (max-width: 768px) {
+  .horario-grid {
+    grid-template-columns: 1fr;
   }
-}
-
-/* Extra opcional: tres columnas en pantallas muy anchas */
-@media (min-width: 1000px) {
-  .horario {
-    grid-template-columns: repeat(3, 1fr);
+  .dia-col {
+    padding: 0.75rem;
   }
 }
