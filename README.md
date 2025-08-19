@@ -1,6 +1,6 @@
 # Gustavo-Harnisch.github.io
-
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-active-blue?logo=github)](https://gustavo-harnisch.github.io/)
+<!-- Shields -->
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-active-blue?logo=github)](https://gustavo-harnisch.github.io/) 
 [![JavaScript](https://img.shields.io/badge/JavaScript-77.5%25-yellow?logo=javascript)](https://github.com/Gustavo-Harnisch/Gustavo-Harnisch.github.io)
 [![CSS](https://img.shields.io/badge/CSS-15.5%25-blue?logo=css3)](https://github.com/Gustavo-Harnisch/Gustavo-Harnisch.github.io)
 [![HTML](https://img.shields.io/badge/HTML-7%25-orange?logo=html5)](https://github.com/Gustavo-Harnisch/Gustavo-Harnisch.github.io)
