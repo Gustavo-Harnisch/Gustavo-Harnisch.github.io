@@ -12,29 +12,19 @@ Este repositorio está pensado para alojar diferentes proyectos y mostrarlos en 
 
 Aquí encontrarás una colección de proyectos desarrollados en **JavaScript**, **CSS** y **HTML**. Cada uno de ellos se presenta como parte de mi portafolio personal, accesible públicamente a través de GitHub Pages.
 
-## Tecnologías principales
-
-- **JavaScript** (77.5%)
-- **CSS** (15.5%)
-- **HTML** (7%)
-
-## Cómo ver la página
+## LINK
 
 Puedes acceder a la página principal de los proyectos en:
 
-[https://gustavo-harnisch.github.io/](https://gustavo-harnisch.github.io/)
+[gustavo-harnisch.github.io](https://gustavo-harnisch.github.io/)
 
-## Estructura del repositorio
 
-- `/proyecto1/` — Ejemplo de proyecto 1
-- `/proyecto2/` — Ejemplo de proyecto 2
-- `/assets/` — Recursos compartidos como imágenes, estilos y scripts
 
-> **Nota**: Cada carpeta representa un proyecto distinto que se puede visualizar y explorar desde la página principal.
 
 ## Contribuir
 
-Si deseas aportar con mejoras, sugerencias o nuevos proyectos, ¡no dudes en hacer un _fork_ y enviar un _pull request_!
+Si deseas aportar con mejoras, sugerencias o nuevos proyectos, ¡no dudes en hacer un _fork_ y enviar un _pull request_! 
+me ayudas mucho con tus comentarios!!
 
 ---
 
