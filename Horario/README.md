@@ -6,7 +6,7 @@ El diseño es **responsive**, funciona en computador y celular.
 ---
 
 ## 🌐 ENLACE
-👉 [Ver en GitHub Pages](https://gustavo-harnisch.github.io/Horario/)
+👉 [-> LINK A HORARIO <-](https://gustavo-harnisch.github.io/Horario/)
 
 ---
 

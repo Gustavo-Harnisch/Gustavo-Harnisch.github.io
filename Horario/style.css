@@ -74,7 +74,10 @@ body {
 .quantico-bold-italic{font-weight:700;font-style:italic}
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 680px) {
   #horario { padding: .75rem; }
-  .horario-grid { gap: .75rem; }
+  .horario-grid { 
+    gap: .75rem; 
+    grid-template-columns: 1fr !important;   /* <— AÑADE */
+  }
 }
