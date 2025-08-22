@@ -1,96 +1,93 @@
-// script.js — vista por columnas (días) usando <div>, responsive para móvil.
+// script.js — horario por columnas (días) con datos como *strings*
 // Requiere un contenedor <div id="horario"></div> en el HTML.
-// Lee un CSV con cabeceras: Hora;Lunes;Martes;Miércoles;Jueves;Viernes
-
-function parseStartMinutes(rango) {
-  // "HH:MM - HH:MM" -> minutos desde 00:00 del inicio
-  const m = rango.match(/^\s*(\d{2}):(\d{2})\s*-\s*(\d{2}):(\d{2})\s*$/);
-  if (!m) return Number.MAX_SAFE_INTEGER;
-  const hh = parseInt(m[1], 10), mm = parseInt(m[2], 10);
-  return hh * 60 + mm;
-}
+// Lee un CSV separado por ';' cuya primera columna es "Hora" y el resto son días
+// (p. ej., Lunes;Martes;Miércoles;Jueves;Viernes;Sabado).
+// No hace conversiones numéricas: todo se maneja como texto para simplificar el DOM.
 
 async function cargarHorarioPorDias() {
   const root = document.getElementById("horario");
+  if (!root) return;
   root.innerHTML = ""; // limpiar
 
   try {
+    // 1) Cargar CSV como texto
     const res = await fetch("horario.csv", { cache: "no-store" });
     if (!res.ok) throw new Error("No se pudo cargar horario.csv");
-    const texto = await res.text();
+    const csvText = await res.text();
 
-    const filas = texto.trim().split(/\r?\n/);
-    if (filas.length < 2) throw new Error("CSV vacío o sin cabeceras");
+    // 2) Parsear CSV (separador ';') SIN convertir a números
+    //    - Mantiene espacios internos; recorta bordes para DOM limpio.
+    const lines = csvText
+      .split(/\r?\n/)
+      .map(l => l.trim())
+      .filter(l => l.length > 0);
 
-    const cab = filas[0].split(";").map(s => s.trim());
-    const dias = cab.slice(1); // [Lunes, Martes, Miércoles, Jueves, Viernes]
-
-    // Acumula por día
-    const porDia = Object.fromEntries(dias.map(d => [d, []]));
-
-    for (let i = 1; i < filas.length; i++) {
-      if (!filas[i].trim()) continue;
-      const cols = filas[i].split(";").map(s => s.replace(/^"(.*)"$/, "$1").trim());
-      while (cols.length < 6) cols.push("");
-
-      const hora = cols[0];
-      const startMin = parseStartMinutes(hora);
-      for (let d = 1; d <= 5; d++) {
-        const textoClase = cols[d];
-        if (!textoClase) continue;
-        porDia[dias[d - 1]].push({ hora, startMin, texto: textoClase });
-      }
+    if (lines.length === 0) {
+      root.textContent = "El CSV está vacío.";
+      return;
     }
 
-    // Ordena cada día por hora de inicio
-    for (const d of dias) {
-      porDia[d].sort((a, b) => a.startMin - b.startMin);
+    const header = lines[0].split(";").map(h => h.trim());
+    if (header.length < 2 || header[0].toLowerCase() !== "hora") {
+      root.textContent = "Cabecera inválida. La primera columna debe llamarse 'Hora'.";
+      return;
     }
 
-    // Construye layout de 5 columnas
+    const dayHeaders = header.slice(1); // días dinámicos según CSV
+
+    // 3) Convertir filas a una matriz de celdas string
+    const rows = lines.slice(1).map(line => line.split(";").map(c => c.trim()));
+
+    // 4) Crear grilla: una columna por día
     const grid = document.createElement("div");
     grid.className = "horario-grid";
+    grid.style.display = "grid";
+    grid.style.gap = "1rem";
+    grid.style.gridTemplateColumns = `repeat(${dayHeaders.length}, minmax(180px, 1fr))`;
 
-    dias.forEach(dia => {
-      const col = document.createElement("section");
+    // 5) Por cada día, construir su columna con tarjetas .slot
+    dayHeaders.forEach((dayName, dayIdx) => {
+      const col = document.createElement("div");
       col.className = "dia-col";
 
       const h2 = document.createElement("h2");
-      h2.className = "dia-titulo";
-      h2.textContent = dia;
+      h2.textContent = dayName; // usar el texto tal cual viene del CSV
       col.appendChild(h2);
 
-      if (porDia[dia].length === 0) {
-        const empty = document.createElement("p");
-        empty.className = "dia-vacio";
-        empty.textContent = "—";
-        col.appendChild(empty);
-      } else {
-        porDia[dia].forEach(({hora, texto}) => {
-          const card = document.createElement("div");
-          card.className = "clase";
+      rows.forEach(cells => {
+        const hora = (cells[0] ?? "").trim(); // texto tal cual
+        const contenido = (cells[dayIdx + 1] ?? "").trim();
 
-          const title = document.createElement("h3");
-          title.textContent = texto;
-          card.appendChild(title);
+        // Si hay contenido para este día/horario, creamos un bloque .slot
+        if (contenido) {
+          const slot = document.createElement("div");
+          slot.className = "slot";
 
-          const meta = document.createElement("p");
-          meta.className = "clase-meta";
-          meta.textContent = hora;
-          card.appendChild(meta);
+          const materiaEl = document.createElement("div");
 
-          col.appendChild(card);
-        });
-      }
+          materiaEl.className = "materia";
+          materiaEl.textContent = contenido; // string literal
+
+          const horaEl = document.createElement("div");
+          horaEl.className = "hora";
+          horaEl.textContent = hora; // NO se parsea, se deja como string
+
+          
+          slot.appendChild(materiaEl);
+          slot.appendChild(horaEl);
+          
+          col.appendChild(slot);
+        }
+      });
 
       grid.appendChild(col);
     });
 
     root.appendChild(grid);
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
     const p = document.createElement("p");
-    p.textContent = "No se pudo cargar el horario. Verifica el CSV (cabeceras y separador ;).";
+    p.textContent = "No se pudo cargar el horario. Verifica el CSV (cabeceras y separador ';').";
     root.appendChild(p);
   }
 }
