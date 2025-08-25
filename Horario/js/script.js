@@ -11,7 +11,7 @@ async function cargarHorarioPorDias() {
 
   try {
     // 1) Cargar CSV como texto
-    const res = await fetch("horario.csv", { cache: "no-store" });
+    const res = await fetch("data/horario.csv", { cache: "no-store" });
     if (!res.ok) throw new Error("No se pudo cargar horario.csv");
     const csvText = await res.text();
 
