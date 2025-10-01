@@ -1,0 +1,41 @@
+.
+├── estructura.txt
+├── Horario
+│   ├── assets
+│   │   ├── apple-touch-icon.png
+│   │   ├── favicon.ico
+│   │   └── logo.png
+│   ├── css
+│   │   └── style.css
+│   ├── data
+│   │   └── horario.csv
+│   ├── index.html
+│   ├── js
+│   │   └── script.js
+│   └── README.md
+├── index.html
+├── pong
+│   ├── game.js
+│   ├── index.html
+│   ├── README.md
+│   └── style.css
+├── react-web
+│   ├── dist
+│   │   ├── assets
+│   │   │   ├── index-CRQB15w4.js
+│   │   │   └── index-Dtn62Xmo.css
+│   │   └── index.html
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── README.md
+│   ├── src
+│   │   ├── App.css
+│   │   ├── App.jsx
+│   │   ├── assets
+│   │   ├── index.css
+│   │   └── main.jsx
+│   └── vite.config.js
+└── README.md
+
+12 directories, 27 files
