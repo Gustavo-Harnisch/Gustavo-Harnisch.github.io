@@ -10,7 +10,7 @@ Material interactivo con pestañas, fórmulas y ejercicios resueltos para repasa
 - **Sección de Estadística (este repo):** https://gustavo-harnis.github.io/estadistica_solves/
 
 <p align="center">
-  <a href="https://gustavo-Harnisch.github.io/estadistica_solve">
+  <a href="https://Gustavo-Harnisch.github.io/estadistica_solve">
     <img alt="Abrir Estadística" src="https://img.shields.io/badge/Abrir%20Estad%C3%ADstica-%F0%9F%93%8C-blue" />
   </a>
 </p>
