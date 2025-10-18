@@ -6,12 +6,11 @@ Material interactivo con pestañas, fórmulas y ejercicios resueltos para repasa
 
 ## 🔗 Acceso directo
 
-- **Página principal del sitio:** https://gustavo-harnis.github.io  
-- **Sección de Estadística (este repo):** https://gustavo-harnis.github.io/estadistica_solves/
+- **Página principal del sitio:** https://Gustavo-Harnisch.github.io  
+- **Sección de Estadística (este repo):** https://Gustavo-Harnisch.github.io/estadistica_solves/
 
 <p align="center">
-  <a https://Gustavo-Harnisch.github.io/estadistica_solves/">
-    
+  <a href="https://Gustavo-Harnisch.github.io/estadistica_solves/">
     <img alt="Abrir Estadística" src="https://img.shields.io/badge/Abrir%20Estad%C3%ADstica-%F0%9F%93%8C-blue" />
   </a>
 </p>
@@ -34,7 +33,7 @@ Material interactivo con pestañas, fórmulas y ejercicios resueltos para repasa
    - **Source:** rama (por ejemplo, `main`)
    - **Folder:** `/root` (o `/docs` si usas carpeta docs)
 3. Guarda y, cuando termine el deploy, abre  
-   **https://gustavo-harnis.github.io/estadistica_solves/**
+   **https://Gustavo-Harnisch.github.io/estadistica_solves/**
 
 > Si usas este archivo como portada del repo, nómbralo `README.md`.  
 > Si será la portada del sitio, ponlo como `index.md` en la raíz del *branch* configurado para Pages.
@@ -42,5 +41,5 @@ Material interactivo con pestañas, fórmulas y ejercicios resueltos para repasa
 ---
 
 ## ✍️ Autor
-Hecho por **Gustavo Harnis**.  
+Hecho por **Gustavo Harnisch**.  
 ¿Sugerencias o bugs? Abre un *issue* en el repositorio.
