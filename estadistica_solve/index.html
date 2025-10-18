@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario con Ejercicios Resueltos</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Calibri', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            background: #2c3e50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #1a252f;
+        }
+        #formulario {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+        .section {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+        .section-title {
+            background: #34495e;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border-radius: 3px;
+        }
+        .exercise-box {
+            background: #e8f4f8;
+            border-left: 4px solid #16a085;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 3px;
+        }
+        .exercise-number {
+            color: #16a085;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .exercise-statement {
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+        .solution {
+            background: #f0f8f5;
+            border-left: 3px solid #27ae60;
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+        .formula-box {
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 3px;
+        }
+        .formula-label {
+            color: #2c3e50;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+        .formula-content {
+            font-family: 'Courier New', monospace;
+            color: #1a1a1a;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .description {
+            color: #555;
+            font-size: 12px;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 11px;
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 6px;
+            text-align: left;
+        }
+        th {
+            background: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .note-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+        .error-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+        }
+        h3 {
+            color: #2c3e50;
+            font-size: 13px;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+        .step {
+            margin: 5px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+        .step:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .button-container {
+                display: none;
+            }
+            #formulario {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button onclick="descargarPDF()">📥 Descargar como PDF</button>
+    </div>
+
+    <div id="formulario">
+        <div class="header">
+            <h1>📊 FORMULARIO CON EJERCICIOS RESUELTOS</h1>
+            <p>Probabilidad • Conteo • Conjuntos</p>
+            <p style="font-size: 12px; margin-top: 8px;">Para uso en pruebas evaluadas</p>
+        </div>
+
+        <!-- EJERCICIOS RESUELTOS -->
+        <div class="section">
+            <div class="section-title">EJERCICIOS RESUELTOS (Del Listado 04)</div>
+        </div>
+
+        <!-- Ejercicio 1 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 1:</span>
+                <div class="exercise-statement">En una población, P(T) = 0,70 (tuberculino-positivo) y P(R) = 0,60 (anticuerpos contra rubéola). Si ambos sucesos son independientes, calcule P(T o R).</div>
+                <div class="solution">
+                    <strong>Solución:</strong>
+                    <div class="step">Fórmula: P(T ∪ R) = P(T) + P(R) - P(T ∩ R)</div>
+                    <div class="step">Como son independientes: P(T ∩ R) = P(T) · P(R) = 0,70 × 0,60 = 0,42</div>
+                    <div class="step">P(T ∪ R) = 0,70 + 0,60 - 0,42 = 0,88</div>
+                    <strong>Respuesta: P(T o R) = 0,88 o 88%</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 2:</span>
+                <div class="exercise-statement">De 50 vendedores que recibieron bono, 20 asistieron a capacitación. Empresa con 200 empleados. Sea B = bono, S = capacitación. Hallar P(B), P(S|B) y P(B ∩ S).</div>
+                <div class="solution">
+                    <strong>Solución:</strong>
+                    <div class="step">P(B) = 50/200 = 0,25</div>
+                    <div class="step">P(S|B) = 20/50 = 0,40 (20 de 50 bonificados asistieron)</div>
+                    <div class="step">P(B ∩ S) = P(B) · P(S|B) = 0,25 × 0,40 = 0,10</div>
+                    <strong>Respuesta: P(B) = 0,25 ; P(S|B) = 0,40 ; P(B ∩ S) = 0,10</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 3:</span>
+                <div class="exercise-statement">P(diagnóstico correcto) = 0,7. P(demanda | diagnóstico incorrecto) = 0,9. ¿Cuál es P(diagnóstico incorrecto Y demanda)?</div>
+                <div class="solution">
+                    <strong>Solución:</strong>
+                    <div class="step">P(incorrecto) = 1 - 0,7 = 0,3</div>
+                    <div class="step">Fórmula: P(incorrecto ∩ demanda) = P(incorrecto) · P(demanda|incorrecto)</div>
+                    <div class="step">P(incorrecto ∩ demanda) = 0,3 × 0,9 = 0,27</div>
+                    <strong>Respuesta: 0,27 o 27%</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 4 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 4 (Talca):</span>
+                <div class="exercise-statement">P(helado) = 60%, P(torta) = 36%, P(torta|helado) = 40%. Calcular P(helado|torta).</div>
+                <div class="solution">
+                    <strong>Solución (Bayes):</strong>
+                    <div class="step">P(torta ∩ helado) = P(helado) · P(torta|helado) = 0,60 × 0,40 = 0,24</div>
+                    <div class="step">P(helado|torta) = P(torta ∩ helado) / P(torta) = 0,24 / 0,36 = 2/3 ≈ 0,667</div>
+                    <strong>Respuesta: P(helado|torta) ≈ 0,667 o 66,7%</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 5 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 5:</span>
+                <div class="exercise-statement">Máquina A: 3000 envases, 2% defectuosos. Máquina B: 2000 envases, 4% defectuosos. a) P(defectuoso) b) P(de A | defectuoso)? P(de B | defectuoso)?</div>
+                <div class="solution">
+                    <strong>Solución (Ley Prob. Total y Bayes):</strong>
+                    <h3>Parte a)</h3>
+                    <div class="step">P(A) = 3000/5000 = 0,6 ; P(B) = 2000/5000 = 0,4</div>
+                    <div class="step">P(def|A) = 0,02 ; P(def|B) = 0,04</div>
+                    <div class="step">P(def) = P(A)·P(def|A) + P(B)·P(def|B) = 0,6×0,02 + 0,4×0,04 = 0,012 + 0,016 = 0,028</div>
+                    <h3>Parte b)</h3>
+                    <div class="step">P(A|def) = [P(A)·P(def|A)] / P(def) = (0,6×0,02) / 0,028 = 0,012/0,028 ≈ 0,429</div>
+                    <div class="step">P(B|def) = [P(B)·P(def|B)] / P(def) = (0,4×0,04) / 0,028 = 0,016/0,028 ≈ 0,571</div>
+                    <strong>Respuesta: a) P(def) = 0,028 ; b) P(A|def) ≈ 0,429 ; P(B|def) ≈ 0,571</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 6 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 6:</span>
+                <div class="exercise-statement">P(A) = 0,5, P(B) = 0,3, P(C) = 0,1. A y B independientes; B y C mutuamente excluyentes. Calcular: a) B y C ambos b) Solo uno de A ó B c) A dado que B</div>
+                <div class="solution">
+                    <strong>Solución:</strong>
+                    <h3>Parte a) B ∩ C</h3>
+                    <div class="step">Como B y C son mutuamente excluyentes: P(B ∩ C) = 0</div>
+                    <h3>Parte b) Solo uno de A ó B = (A ∩ Bᶜ) ∪ (Aᶜ ∩ B)</h3>
+                    <div class="step">P(A ∩ Bᶜ) = P(A)·(1-P(B)) = 0,5 × 0,7 = 0,35 (independientes)</div>
+                    <div class="step">P(Aᶜ ∩ B) = (1-P(A))·P(B) = 0,5 × 0,3 = 0,15</div>
+                    <div class="step">P(solo uno) = 0,35 + 0,15 = 0,50</div>
+                    <h3>Parte c) P(A|B)</h3>
+                    <div class="step">Como A y B son independientes: P(A|B) = P(A) = 0,5</div>
+                    <strong>Respuesta: a) 0 ; b) 0,50 ; c) 0,5</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 7 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 7:</span>
+                <div class="exercise-statement">P(Talca) = 0,7, P(Curicó) = 0,4, P(Talca ∪ Curicó) = 0,8. ¿P(ambas ciudades)? ¿P(ninguna)?</div>
+                <div class="solution">
+                    <strong>Solución:</strong>
+                    <h3>Parte a) P(Talca ∩ Curicó)</h3>
+                    <div class="step">Fórmula: P(T ∪ C) = P(T) + P(C) - P(T ∩ C)</div>
+                    <div class="step">0,8 = 0,7 + 0,4 - P(T ∩ C)</div>
+                    <div class="step">P(T ∩ C) = 1,1 - 0,8 = 0,3</div>
+                    <h3>Parte b) P(ninguna) = P((T ∪ C)ᶜ)</h3>
+                    <div class="step">P((T ∪ C)ᶜ) = 1 - P(T ∪ C) = 1 - 0,8 = 0,2</div>
+                    <strong>Respuesta: a) 0,3 ; b) 0,2</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- Ejercicio 8 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 8:</span>
+                <div class="exercise-statement">Distribución de clientes en fondos: 20% dinero, 15% corto, 10% intermedio, 5% largo, 18% alto riesgo, 25% moderado, 7% balanceado. a) P(balanceado) b) P(bonos) c) P(no acciones)</div>
+                <div class="solution">
+                    <strong>Solución:</strong>
+                    <div class="step">a) P(balanceado) = 0,07 = 7%</div>
+                    <div class="step">b) P(bonos) = 0,15 + 0,10 + 0,05 = 0,30 = 30%</div>
+                    <div class="step">c) P(acciones) = 0,18 + 0,25 = 0,43 ; P(no acciones) = 1 - 0,43 = 0,57 = 57%</div>
+                    <strong>Respuesta: a) 7% ; b) 30% ; c) 57%</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 9 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 9:</span>
+                <div class="exercise-statement">Tres proyectos: P(A₁)=0,22, P(A₂)=0,25, P(A₃)=0,28, P(A₁∩A₂)=0,11, P(A₁∩A₃)=0,05, P(A₂∩A₃)=0,07, P(A₁∩A₂∩A₃)=0,01. Calcular: a) P(A₁∪A₂) b) P(A₁ᶜ∩A₂ᶜ) c) P(A₁∪A₂∪A₃)</div>
+                <div class="solution">
+                    <strong>Solución:</strong>
+                    <h3>Parte a) P(A₁ ∪ A₂)</h3>
+                    <div class="step">P(A₁ ∪ A₂) = P(A₁) + P(A₂) - P(A₁ ∩ A₂) = 0,22 + 0,25 - 0,11 = 0,36</div>
+                    <h3>Parte b) P(A₁ᶜ ∩ A₂ᶜ) = P((A₁ ∪ A₂)ᶜ)</h3>
+                    <div class="step">P((A₁ ∪ A₂)ᶜ) = 1 - P(A₁ ∪ A₂) = 1 - 0,36 = 0,64</div>
+                    <h3>Parte c) P(A₁ ∪ A₂ ∪ A₃)</h3>
+                    <div class="step">= 0,22 + 0,25 + 0,28 - 0,11 - 0,05 - 0,07 + 0,01 = 0,53</div>
+                    <strong>Respuesta: a) 0,36 ; b) 0,64 ; c) 0,53</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 10 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 10:</span>
+                <div class="exercise-statement">A = no excede mínimo en enero, B = no excede en julio. P(A)=0,8, P(B)=0,7, P(A∪B)=0,9. a) P(A∩B) b) P(exceso exactamente uno de dos meses)</div>
+                <div class="solution">
+                    <strong>Solución:</strong>
+                    <h3>Parte a) P(A ∩ B)</h3>
+                    <div class="step">P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</div>
+                    <div class="step">0,9 = 0,8 + 0,7 - P(A ∩ B)</div>
+                    <div class="step">P(A ∩ B) = 1,5 - 0,9 = 0,6</div>
+                    <h3>Parte b) Exceso exactamente uno = (Aᶜ ∩ B) ∪ (A ∩ Bᶜ)</h3>
+                    <div class="step">P(Aᶜ ∩ B) = P(B) - P(A ∩ B) = 0,7 - 0,6 = 0,1</div>
+                    <div class="step">P(A ∩ Bᶜ) = P(A) - P(A ∩ B) = 0,8 - 0,6 = 0,2</div>
+                    <div class="step">P(exactamente uno) = 0,1 + 0,2 = 0,3</div>
+                    <strong>Respuesta: a) 0,6 ; b) 0,3</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 11 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 11:</span>
+                <div class="exercise-statement">A = solicitud sobre SPSS, B = solicitud sobre SAS. P(A)=0,30, P(B)=0,50. a) ¿Por qué P(A)+P(B)≠1? b) P(Aᶜ) c) P(A∪B) d) P(Aᶜ∩Bᶜ)</div>
+                <div class="solution">
+                    <strong>Solución:</strong>
+                    <div class="step">a) Porque existen otras solicitudes posibles (no son complementarios ni exhaustivos)</div>
+                    <div class="step">b) P(Aᶜ) = 1 - 0,30 = 0,70</div>
+                    <div class="step">c) Suponiendo A y B mutuamente excluyentes: P(A ∪ B) = 0,30 + 0,50 = 0,80</div>
+                    <div class="step">d) P(Aᶜ ∩ Bᶜ) = 1 - P(A ∪ B) = 1 - 0,80 = 0,20 (otras solicitudes)</div>
+                    <strong>Respuesta: a) Otras solicitudes posibles ; b) 0,70 ; c) 0,80 ; d) 0,20</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 12 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 12 (Conteo):</span>
+                <div class="exercise-statement">5 profesores (Anderson, Box, Cox, Cramer, Fisher) seleccionar 2 para comité. a) P(Anderson Y Box) b) P(al menos un miembro con C) c) P(≥15 años experiencia)</div>
+                <div class="solution">
+                    <strong>Solución:</strong>
+                    <div class="step">Total de pares: C(5,2) = 10</div>
+                    <h3>Parte a) Anderson Y Box</h3>
+                    <div class="step">Solo 1 forma de elegir este par</div>
+                    <div class="step">P(Anderson y Box) = 1/10 = 0,1</div>
+                    <h3>Parte b) Al menos un C (Cox o Cramer)</h3>
+                    <div class="step">P(ningún C) = C(3,2)/C(5,2) = 3/10</div>
+                    <div class="step">P(al menos un C) = 1 - 3/10 = 7/10 = 0,7</div>
+                    <h3>Parte c) ≥15 años (3,6,7,10,14 años). Pares con ≥15:</h3>
+                    <div class="step">(7,10): 17✓, (7,14): 21✓, (10,14): 24✓, (6,10): 16✓, (6,14): 20✓</div>
+                    <div class="step">Pares válidos: 5 ; P = 5/10 = 0,5</div>
+                    <strong>Respuesta: a) 0,1 ; b) 0,7 ; c) 0,5</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 13 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 13 (Demostración):</span>
+                <div class="exercise-statement">Demostrar que si A ⊆ B, entonces P(A) ≤ P(B)</div>
+                <div class="solution">
+                    <strong>Demostración:</strong>
+                    <div class="step">Si A ⊆ B, entonces B = A ∪ (B ∩ Aᶜ) (union disjunta)</div>
+                    <div class="step">P(B) = P(A) + P(B ∩ Aᶜ) (aditividad, eventos disjuntos)</div>
+                    <div class="step">Como P(B ∩ Aᶜ) ≥ 0 (axioma 2): P(B) ≥ P(A)</div>
+                    <div class="step">Por lo tanto: P(B - A) = P(B) - P(A)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ejercicio 14 -->
+        <div class="section">
+            <div class="exercise-box">
+                <span class="exercise-number">Ejercicio 14:</span>
+                <div class="exercise-statement">P(verde)=0,09, P(blanco)=0,15, P(rojo)=0,21, P(azul)=0,23. ¿P(uno de esos colores)?</div>
+                <div class="solution">
+                    <strong>Solución:</strong>
+                    <div class="step">Los colores son mutuamente excluyentes</div>
+                    <div class="step">P(uno de esos) = 0,09 + 0,15 + 0,21 + 0,23 = 0,68</div>
+                    <strong>Respuesta: 0,68 o 68%</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- SECCIÓN DE FÓRMULAS RESUMIDA -->
+        <div class="section">
+            <div class="section-title">RESUMEN DE FÓRMULAS CLAVE</div>
+        </div>
+
+        <div class="section">
+            <h3>Probabilidad Básica</h3>
+            <div class="formula-box">
+                <span class="formula-label">Complemento</span>
+                <div class="formula-content">P(Aᶜ) = 1 - P(A)</div>
+            </div>
+            <div class="formula-box">
+                <span class="formula-label">Unión</span>
+                <div class="formula-content">P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</div>
+            </div>
+            <div class="formula-box">
+                <span class="formula-label">Condicional</span>
+                <div class="formula-content">P(A|B) = P(A ∩ B) / P(B)  ,  P(B) > 0</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Teorema de Bayes</h3>
+            <div class="formula-box">
+                <span class="formula-label">Ley Probabilidad Total</span>
+                <div class="formula-content">P(E) = Σᵢ P(Aᵢ) · P(E|Aᵢ)</div>
+            </div>
+            <div class="formula-box">
+                <span class="formula-label">Bayes</span>
+                <div class="formula-content">P(Aᵢ|E) = P(Aᵢ) · P(E|Aᵢ) / Σⱼ P(Aⱼ) · P(E|Aⱼ)</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Conteo</h3>
+            <table>
