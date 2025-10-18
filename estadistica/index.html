@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Probabilidad Conteo Conjuntos</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Calibri', sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            background: #2c3e50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #1a252f;
+        }
+        #formulario {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+        .section {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+        .section-title {
+            background: #34495e;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border-radius: 3px;
+        }
+        .formula-box {
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 3px;
+        }
+        .formula-label {
+            color: #2c3e50;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+        .formula-content {
+            font-family: 'Courier New', monospace;
+            color: #1a1a1a;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .description {
+            color: #555;
+            font-size: 12px;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 12px;
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .note-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        .error-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        .keyword {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            margin: 1px 2px;
+            font-weight: bold;
+        }
+        .list-item {
+            margin-bottom: 6px;
+            padding-left: 15px;
+            position: relative;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        .list-item:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        h3 {
+            color: #2c3e50;
+            font-size: 14px;
+            margin-top: 12px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            color: #999;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+        }
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .button-container {
+                display: none;
+            }
+            #formulario {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button onclick="descargarPDF()">📥 Descargar como PDF</button>
+    </div>
+
+    <div id="formulario">
+        <div class="header">
+            <h1>📊 FORMULARIO COMPLETO</h1>
+            <p>Probabilidad • Conteo • Conjuntos</p>
+            <p style="font-size: 12px; margin-top: 8px;">Para uso en pruebas evaluadas</p>
+        </div>
+
+        <!-- SECCIÓN 1: PROBABILIDAD BÁSICA -->
+        <div class="section">
+            <div class="section-title">1. AXIOMAS DE PROBABILIDAD</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">Axioma 1: Espacio Muestral</span>
+                <div class="formula-content">P(Ω) = 1</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Axioma 2: No-negatividad</span>
+                <div class="formula-content">P(A) ≥ 0, para todo evento A</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Axioma 3: Aditividad</span>
+                <div class="formula-content">Si A₁, A₂, A₃,... son eventos mutuamente excluyentes:<br>P(A₁ ∪ A₂ ∪ A₃ ∪ ...) = ΣP(Aᵢ)</div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: TEOREMAS FUNDAMENTALES -->
+        <div class="section">
+            <div class="section-title">2. TEOREMAS FUNDAMENTALES</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">Evento Nulo</span>
+                <div class="formula-content">P(∅) = 0</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Complemento</span>
+                <div class="formula-content">P(Aᶜ) = 1 - P(A)</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Monotonía (Subconjunto)</span>
+                <div class="formula-content">Si A ⊆ B, entonces:<br>P(A) ≤ P(B) y P(B - A) = P(B) - P(A)</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Unión de 2 Eventos</span>
+                <div class="formula-content">P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</div>
+                <div class="description">⚠️ NO olvides restar la intersección para evitar doble conteo</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Unión de 3 Eventos</span>
+                <div class="formula-content">P(A ∪ B ∪ C) = P(A) + P(B) + P(C) - P(A∩B) - P(A∩C) - P(B∩C) + P(A∩B∩C)</div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: PROBABILIDAD EQUIPROBABLE -->
+        <div class="section">
+            <div class="section-title">3. PROBABILIDAD EN ESPACIOS EQUIPROBABLES</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">Regla Clásica</span>
+                <div class="formula-content">P(A) = |A| / |Ω| = (casos favorables) / (casos totales)</div>
+                <div class="description">Usar CUANDO todos los resultados son igualmente probables</div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 4: PROBABILIDAD CONDICIONAL -->
+        <div class="section">
+            <div class="section-title">4. PROBABILIDAD CONDICIONAL</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">Definición (P(B) > 0)</span>
+                <div class="formula-content">P(A|B) = P(A ∩ B) / P(B)</div>
+                <div class="description">Probabilidad de A DADO que B ya ocurrió</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Regla de la Multiplicación (2 eventos)</span>
+                <div class="formula-content">P(A ∩ B) = P(A|B) · P(B) = P(B|A) · P(A)</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Regla de la Multiplicación (k eventos)</span>
+                <div class="formula-content">P(A₁ ∩ A₂ ∩ ... ∩ Aₖ) = P(A₁) · P(A₂|A₁) · P(A₃|A₁∩A₂) · ... · P(Aₖ|A₁∩...∩Aₖ₋₁)</div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 5: LEY DE PROBABILIDAD TOTAL Y BAYES -->
+        <div class="section">
+            <div class="section-title">5. LEY DE PROBABILIDAD TOTAL Y TEOREMA DE BAYES</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">Partición de Ω</span>
+                <div class="formula-content">Los conjuntos A₁, A₂, ..., Aₖ forman una partición si:<br>• Aᵢ ≠ ∅, para todo i<br>• Aᵢ ∩ Aⱼ = ∅ para i ≠ j<br>• A₁ ∪ A₂ ∪ ... ∪ Aₖ = Ω</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Ley de Probabilidad Total</span>
+                <div class="formula-content">Si {A₁, A₂, ..., Aₖ} es partición de Ω:<br>P(E) = Σᵢ P(Aᵢ) · P(E|Aᵢ)</div>
+                <div class="description">Usar CUANDO el evento E puede ocurrir por varios caminos</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Teorema de Bayes</span>
+                <div class="formula-content">P(Aᵢ|E) = P(Aᵢ) · P(E|Aᵢ) / [Σⱼ P(Aⱼ) · P(E|Aⱼ)]</div>
+                <div class="description">Invierte condiciones: tenemos efecto, queremos la causa</div>
+            </div>
+
+            <table>
+                <tr>
+                    <th>Elemento</th>
+                    <th>Nombre</th>
+                    <th>Significado</th>
+                </tr>
+                <tr>
+                    <td>P(Aᵢ)</td>
+                    <td>Probabilidad a priori</td>
+                    <td>Probabilidad PREVIA (antes de saber E)</td>
+                </tr>
+                <tr>
+                    <td>P(E|Aᵢ)</td>
+                    <td>Verosimilitud</td>
+                    <td>Probabilidad de E si ocurre Aᵢ</td>
+                </tr>
+                <tr>
+                    <td>P(Aᵢ|E)</td>
+                    <td>Probabilidad a posteriori</td>
+                    <td>Probabilidad POSTERIOR (después de saber E)</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- SECCIÓN 6: INDEPENDENCIA -->
+        <div class="section">
+            <div class="section-title">6. INDEPENDENCIA</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">Independencia (mediante condicional)</span>
+                <div class="formula-content">A y B son independientes ⟺ P(A|B) = P(A)</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Independencia Mutua (mediante intersección)</span>
+                <div class="formula-content">A y B son mutuamente independientes ⟺ P(A ∩ B) = P(A) · P(B)</div>
+            </div>
+
+            <div class="error-box">
+                <strong>⚠️ DIFERENCIA CRÍTICA: Independencia ≠ Exclusión Mutua</strong><br>
+                • INDEPENDIENTES: Información sobre uno no afecta al otro<br>
+                • EXCLUYENTES: No pueden ocurrir juntos (P(A ∩ B) = 0)<br>
+                • Si P(A) y P(B) > 0: No pueden ser ambas simultáneamente
+            </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- SECCIÓN 7: TÉCNICAS DE CONTEO -->
+        <div class="section">
+            <div class="section-title">7. TÉCNICAS DE CONTEO - ÁRBOL DE DECISIÓN</div>
+            
+            <div class="note-box">
+                <strong>Pregunta 1:</strong> ¿Importa el ORDEN de los elementos?<br>
+                <strong>Pregunta 2:</strong> ¿Se permite REPETICIÓN de elementos?<br>
+                <strong>Pregunta 3:</strong> ¿Hay OBJETOS IDÉNTICOS?
+            </div>
+        </div>
+
+        <!-- SECCIÓN 8: REGLA DEL PRODUCTO -->
+        <div class="section">
+            <div class="section-title">8. REGLA DEL PRODUCTO</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">Para Pares Ordenados</span>
+                <div class="formula-content">Si 1ª opción: n₁ maneras, 2ª opción: n₂ maneras<br>Total: n₁ × n₂</div>
+                <div class="description">Ejemplo: 12 fontaneros × 9 electricistas = 108 pares</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Para k-tuplas</span>
+                <div class="formula-content">n₁ × n₂ × n₃ × ... × nₖ</div>
+                <div class="description">Ejemplo: Códigos de 3 letras + 3 dígitos con repetición = 26³ × 10³</div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 9: PERMUTACIONES -->
+        <div class="section">
+            <div class="section-title">9. PERMUTACIONES</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">Todos los n Objetos (n! = "n factorial")</span>
+                <div class="formula-content">Pⁿₙ = n! = n × (n-1) × (n-2) × ... × 1</div>
+                <div class="description">Ejemplo: ¿De cuántas formas ordenar 5 libros? = 5! = 120</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">k de n Objetos (Orden SÍ, Repetición NO)</span>
+                <div class="formula-content">Pⁿₖ = n! / (n - k)!</div>
+                <div class="description">Ejemplo: 3 primeros lugares de 9 competidores = 9!/6! = 9×8×7 = 504</div>
+            </div>
+
+            <div class="note-box">
+                <strong>Truco:</strong> Para Pⁿₖ, multiplica k factores descendentes desde n: n × (n-1) × ... × (n-k+1)
+            </div>
+        </div>
+
+        <!-- SECCIÓN 10: COMBINACIONES -->
+        <div class="section">
+            <div class="section-title">10. COMBINACIONES</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">k de n Objetos (Orden NO, Repetición NO)</span>
+                <div class="formula-content">Cⁿₖ = (n sobre k) = n! / [k! × (n - k)!]</div>
+                <div class="description">Ejemplo: Escoger 3 números del 1 al 7 = C(7,3) = 7!/(3!×4!) = 35</div>
+            </div>
+
+            <div class="note-box">
+                <strong>Propiedad:</strong> Cⁿₖ = Cⁿ₍ₙ₋ₖ₎ (elegir k es lo mismo que dejar n-k)
+            </div>
+        </div>
+
+        <!-- SECCIÓN 11: PERMUTACIÓN CON REPETICIÓN -->
+        <div class="section">
+            <div class="section-title">11. PERMUTACIÓN CON REPETICIÓN (ANAGRAMAS)</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">Objetos con Elementos Idénticos</span>
+                <div class="formula-content">Pⁿₙ₁,ₙ₂,...,ₙₖ = n! / (n₁! × n₂! × ... × nₖ!)</div>
+                <div class="description">Donde n = n₁ + n₂ + ... + nₖ (total de objetos)</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Ejemplo: Anagramas de "BANANA"</span>
+                <div class="formula-content">6 letras: B(1), A(3), N(2)<br>Anagramas = 6! / (1! × 3! × 2!) = 720 / 12 = 60</div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 12: TABLA RESUMEN CONTEO -->
+        <div class="section">
+            <div class="section-title">12. TABLA RESUMEN - TÉCNICAS DE CONTEO</div>
+            
+            <table>
+                <tr>
+                    <th>¿Orden?</th>
+                    <th>¿Repetición?</th>
+                    <th>Técnica</th>
+                    <th>Fórmula</th>
+                </tr>
+                <tr>
+                    <td>SÍ</td>
+                    <td>SÍ</td>
+                    <td>Producto</td>
+                    <td>nᵏ</td>
+                </tr>
+                <tr>
+                    <td>SÍ</td>
+                    <td>NO</td>
+                    <td>Permutación</td>
+                    <td>n! / (n-k)!</td>
+                </tr>
+                <tr>
+                    <td>NO</td>
+                    <td>NO</td>
+                    <td>Combinación</td>
+                    <td>n! / [k!(n-k)!]</td>
+                </tr>
+                <tr>
+                    <td>NO</td>
+                    <td>SÍ</td>
+                    <td>Estrellas y Barras</td>
+                    <td>C(n+k-1, k)</td>
+                </tr>
+                <tr>
+                    <td>SÍ</td>
+                    <td>NO</td>
+                    <td>Con Repetición</td>
+                    <td>n! / (n₁!n₂!...nₖ!)</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="page-break"></div>
+
+        <!-- SECCIÓN 13: OPERACIONES CON CONJUNTOS -->
+        <div class="section">
+            <div class="section-title">13. OPERACIONES BÁSICAS CON CONJUNTOS</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">Unión: A ∪ B</span>
+                <div class="formula-content">Elementos que están en A O en B (o ambos)</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Intersección: A ∩ B</span>
+                <div class="formula-content">Elementos que están en A Y en B (simultáneamente)</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Complemento: Aᶜ (o A')</span>
+                <div class="formula-content">Elementos que NO están en A (están en Ω pero no en A)</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Diferencia: A \ B (o A - B)</span>
+                <div class="formula-content">Elementos en A pero NO en B = A ∩ Bᶜ</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Diferencia Simétrica: A △ B</span>
+                <div class="formula-content">(A \ B) ∪ (B \ A) = (A ∪ B) \ (A ∩ B)</div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 14: LEYES DE CONJUNTOS -->
+        <div class="section">
+            <div class="section-title">14. LEYES DE CONJUNTOS</div>
+            
+            <table>
+                <tr>
+                    <th>Ley</th>
+                    <th>Fórmula</th>
+                </tr>
+                <tr>
+                    <td>Identidad</td>
+                    <td>A ∪ ∅ = A  ;  A ∩ Ω = A</td>
+                </tr>
+                <tr>
+                    <td>Dominación</td>
+                    <td>A ∪ Ω = Ω  ;  A ∩ ∅ = ∅</td>
+                </tr>
+                <tr>
+                    <td>Idempotencia</td>
+                    <td>A ∪ A = A  ;  A ∩ A = A</td>
+                </tr>
+                <tr>
+                    <td>Conmutatividad</td>
+                    <td>A ∪ B = B ∪ A  ;  A ∩ B = B ∩ A</td>
+                </tr>
+                <tr>
+                    <td>Asociatividad</td>
+                    <td>(A ∪ B) ∪ C = A ∪ (B ∪ C)  ;  (A ∩ B) ∩ C = A ∩ (B ∩ C)</td>
+                </tr>
+                <tr>
+                    <td>Distributividad</td>
+                    <td>A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)</td>
+                </tr>
+                <tr>
+                    <td>Complemento</td>
+                    <td>A ∪ Aᶜ = Ω  ;  A ∩ Aᶜ = ∅</td>
+                </tr>
+                <tr>
+                    <td>Involución</td>
+                    <td>(Aᶜ)ᶜ = A</td>
+                </tr>
+                <tr>
+                    <td>Absorción</td>
+                    <td>A ∪ (A ∩ B) = A  ;  A ∩ (A ∪ B) = A</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- SECCIÓN 15: LEYES DE DE MORGAN -->
+        <div class="section">
+            <div class="section-title">15. LEYES DE DE MORGAN</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">De Morgan - Forma Básica</span>
+                <div class="formula-content">(A ∪ B)ᶜ = Aᶜ ∩ Bᶜ  →  "No (A o B)" = "No A y No B"<br>(A ∩ B)ᶜ = Aᶜ ∪ Bᶜ  →  "No (A y B)" = "No A o No B"</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">De Morgan - Forma Generalizada</span>
+                <div class="formula-content">(∪ Aᵢ)ᶜ = ∩ Aᵢᶜ  →  "No al menos uno" = "Ninguno"<br>(∩ Aᵢ)ᶜ = ∪ Aᵢᶜ  →  "No todos" = "Al menos uno no"</div>
+            </div>
+
+            <div class="note-box">
+                <strong>Uso práctico:</strong> "Al menos uno" = 1 - P(ninguno)  ;  "Ninguno" = 1 - P(al menos uno)
+            </div>
+        </div>
+
+        <!-- SECCIÓN 16: INCLUSIÓN-EXCLUSIÓN -->
+        <div class="section">
+            <div class="section-title">16. PRINCIPIO DE INCLUSIÓN-EXCLUSIÓN</div>
+            
+            <div class="formula-box">
+                <span class="formula-label">Para 2 Conjuntos</span>
+                <div class="formula-content">|A ∪ B| = |A| + |B| - |A ∩ B|</div>
+                <div class="description">En probabilidad: P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Para 3 Conjuntos</span>
+                <div class="formula-content">|A ∪ B ∪ C| = |A| + |B| + |C| - |A∩B| - |A∩C| - |B∩C| + |A∩B∩C|</div>
+                <div class="description">Suma simples - Resta dobles + Suma triples</div>
+            </div>
+
+            <div class="formula-box">
+                <span class="formula-label">Forma General (n conjuntos)</span>
+                <div class="formula-content">Suma simples - Intersecciones de 2 + Intersecciones de 3 - ... + (-1)ⁿ⁺¹ Intersección de n</div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 17: GUÍA DE PALABRAS CLAVE -->
+        <div class="section">
+            <div class="section-title">17. PALABRAS CLAVE → ESTRUCTURA CORRECTA</div>
+            
+            <h3>🎯 Grupo 1: Lógica Booleana</h3>
+            <div class="list-item"><span class="keyword">o</span> <span class="keyword">al menos</span> <span class="keyword">alguno</span> → Unión (∪) + Inclusión-Exclusión</div>
+            <div class="list-item"><span class="keyword">a lo sumo</span> <span class="keyword">como máximo</span> → Complemento + Unión</div>
+            <div class="list-item"><span class="keyword">ninguno</span> <span class="keyword">ni...ni</span> → Complemento de unión + De Morgan</div>
+            <div class="list-item"><span class="keyword">solo uno</span> <span class="keyword">exactamente uno

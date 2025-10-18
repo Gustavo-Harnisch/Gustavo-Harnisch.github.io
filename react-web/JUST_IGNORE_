@@ -1,0 +1,82 @@
+Estructura por feature (qué va en cada carpeta)
+
+src/features/<feature>/
+  Todo lo específico de una funcionalidad (ej. projects, auth).
+
+  components/
+    UI del feature (cards, listas, toolbars).
+    Rol: Presentación; sin llamadas a API ni lógica pesada.
+    Estilos: *.module.css junto al componente.
+
+  pages/
+    Vistas enrutables del feature (pantallas).
+    Rol: Componer componentes + usar hooks del feature. Manejar loading/error/data.
+    No: lógica de red directa.
+
+  services/
+    Acceso a datos/APIs del feature.
+    Rol: fetch/axios, endpoints, manejo de errores, mapeo de respuestas.
+    No: estado de React ni manipulación del DOM.
+
+  hooks/
+    Lógica de estado/efectos del feature.
+    Rol: Encapsular reglas (paginación, filtros), consumir services, exponer {data, loading, error}.
+
+  index.js (barrel)
+    Re-exporta lo público del feature para importar limpio (import {...} from '@/features/projects').
+    Regla: Exporta solo lo “oficial”; internals privados.
+
+Capas transversales
+
+src/core/
+  Infra compartida entre features.
+  api/ (cliente HTTP, interceptores, baseURL)
+  auth/ (contexto de usuario, guards, helpers)
+  ui/ (Button, Modal, Spinner genéricos)
+  layout/ (Navbar, Footer, Sidebar)
+  router/ (definición central de rutas, lazy)
+  utils/ (formatters, validators)
+  store/ (Redux/Zustand/Context global)
+  Regla: si lo usan ≥2 features, va aquí.
+
+src/styles/
+  Estilos globales y tokens (reset, tipografías, variables, temas).
+  Local siempre en *.module.css junto al componente.
+
+Entradas de la app
+
+src/App.jsx
+  Layout + rutas. Orquesta pantallas. Sin lógica de negocio ni llamadas a API.
+
+src/main.jsx
+  Arranque de React. Monta <App/>, carga estilos globales y providers raíz.
+
+Reglas rápidas
+
+  Servicios → API | Hooks → lógica | Pages → composición | Components → UI.
+  No fetch en componentes/páginas; usar services + hooks.
+  Estado global solo si el local “duele”.
+  CSS Modules para locales; global en styles/.
+  Alias @ → src/ (Vite) para imports cortos.
+  Mantener barrels (index.js) por feature.
+
+
+
+  src/
+├─ features/
+│  └─ projects/
+│     ├─ components/
+│     │  └─ ProjectCard/
+│     │     ├─ ProjectCard.jsx
+│     │     └─ ProjectCard.module.css
+│     ├─ pages/
+│     │  └─ Projects.jsx
+│     ├─ services/
+│     │  └─ projects.service.js
+│     ├─ hooks/
+│     │  └─ useProjects.js
+│     └─ index.js        # (barrel): re-exporta lo público del feature
+├─ core/                 # elementos transversales: auth, ui, api client
+├─ styles/
+├─ App.jsx
+└─ main.jsx
