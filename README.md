@@ -18,6 +18,14 @@ Puedes acceder a la página principal de los proyectos en:
 
 [gustavo-harnisch.github.io](https://gustavo-harnisch.github.io/)
 
+## Estructura del repo
+
+- `index.html` + `assets/`: portada publicada (GitHub Pages).
+- `react-web/`: código fuente (React + Vite) para generar la portada.
+- `Horario/`, `pong/`, `estadistica/`, `estadistica_solve/`: proyectos publicados como secciones.
+
+Para ver el árbol actualizado: `estructura.txt`.
+
 
 
 

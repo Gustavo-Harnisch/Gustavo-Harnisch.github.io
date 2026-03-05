@@ -1,6 +1,7 @@
 .
-├── estructura.txt
+├── .gitignore
 ├── Horario
+│   ├── README.md
 │   ├── assets
 │   │   ├── apple-touch-icon.png
 │   │   ├── favicon.ico
@@ -10,32 +11,44 @@
 │   ├── data
 │   │   └── horario.csv
 │   ├── index.html
-│   ├── js
-│   │   └── script.js
-│   └── README.md
+│   └── js
+│       └── script.js
+├── README.md
+├── assets
+│   ├── index-CRQB15w4.js
+│   └── index-Dtn62Xmo.css
+├── estadistica
+│   ├── README.md
+│   └── index.html
+├── estadistica_solve
+│   ├── README.md
+│   └── index.html
+├── estructura.txt
 ├── index.html
 ├── pong
+│   ├── README.md
 │   ├── game.js
 │   ├── index.html
-│   ├── README.md
 │   └── style.css
 ├── react-web
-│   ├── dist
-│   │   ├── assets
-│   │   │   ├── index-CRQB15w4.js
-│   │   │   └── index-Dtn62Xmo.css
-│   │   └── index.html
-│   ├── index.html
-│   ├── package.json
-│   ├── package-lock.json
+│   ├── .gitignore
+│   ├── ARCHITECTURE.md
 │   ├── README.md
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   └── vite.svg
 │   ├── src
 │   │   ├── App.css
 │   │   ├── App.jsx
 │   │   ├── assets
+│   │   ├── features
+│   │   │   └── projects
 │   │   ├── index.css
 │   │   └── main.jsx
 │   └── vite.config.js
-└── README.md
+└── vite.svg
 
-12 directories, 27 files
+16 directories, 36 files

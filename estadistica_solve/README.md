@@ -7,10 +7,10 @@ Material interactivo con pestañas, fórmulas y ejercicios resueltos para repasa
 ## 🔗 Acceso directo
 
 - **Página principal del sitio:** https://Gustavo-Harnisch.github.io  
-- **Sección de Estadística (este repo):** https://Gustavo-Harnisch.github.io/estadistica_solves/
+- **Sección de Estadística (este repo):** https://gustavo-harnisch.github.io/estadistica_solve/
 
 <p align="center">
-  <a href="https://Gustavo-Harnisch.github.io/estadistica_solves/">
+  <a href="https://gustavo-harnisch.github.io/estadistica_solve/">
     <img alt="Abrir Estadística" src="https://img.shields.io/badge/Abrir%20Estad%C3%ADstica-%F0%9F%93%8C-blue" />
   </a>
 </p>
@@ -28,12 +28,12 @@ Material interactivo con pestañas, fórmulas y ejercicios resueltos para repasa
 ---
 
 ## 🚀 Cómo publicar con GitHub Pages
-1. Asegúrate de que tu `index.html` (o este `index.md`) esté en la raíz del repo **estadistica_solves**.
+1. Asegúrate de que tu `index.html` esté dentro de `/estadistica_solve/` en este repo.
 2. Ve a **Settings → Pages** y elige:
    - **Source:** rama (por ejemplo, `main`)
    - **Folder:** `/root` (o `/docs` si usas carpeta docs)
 3. Guarda y, cuando termine el deploy, abre  
-   **https://Gustavo-Harnisch.github.io/estadistica_solves/**
+   **https://gustavo-harnisch.github.io/estadistica_solve/**
 
 > Si usas este archivo como portada del repo, nómbralo `README.md`.  
 > Si será la portada del sitio, ponlo como `index.md` en la raíz del *branch* configurado para Pages.

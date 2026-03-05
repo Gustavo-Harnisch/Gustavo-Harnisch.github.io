@@ -1,0 +1,20 @@
+# General
+.DS_Store
+Thumbs.db
+*.log
+
+# Editors
+.vscode/
+.idea/
+
+# Env
+.env
+.env.*
+
+# Node (scoped to react-web to avoid ignoring built Pages assets/)
+react-web/node_modules/
+react-web/.vite/
+react-web/dist/
+react-web/dist-ssr/
+react-web/*.local
+

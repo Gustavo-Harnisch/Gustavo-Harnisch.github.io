@@ -1,4 +1,8 @@
-Estructura por feature (qué va en cada carpeta)
+# Estructura sugerida (React)
+
+Notas de organización para el código de `react-web/`.
+
+## Estructura por feature (qué va en cada carpeta)
 
 src/features/<feature>/
   Todo lo específico de una funcionalidad (ej. projects, auth).
@@ -62,7 +66,10 @@ Reglas rápidas
 
 
 
-  src/
+## Ejemplo
+
+```text
+src/
 ├─ features/
 │  └─ projects/
 │     ├─ components/
@@ -80,3 +87,4 @@ Reglas rápidas
 ├─ styles/
 ├─ App.jsx
 └─ main.jsx
+```
