@@ -1,11 +1,11 @@
-Hora;Lunes;Martes;Miércoles;Jueves;Viernes;Sábado
-8:30 - 9:30;INVESTIGACION DE OPERACIONES F-202;;BASE DE DATOS-S2 DCI03;;;INFERECIA Y ESTADISTICA J-301 
-9:35 - 10:35;INVESTIGACION DE OPERACIONES F-202;;BASE DE DATOS-S2 DCI03;;;INFERECIA Y ESTADISTICA J-301
-10:50 - 11:50;COMPUTACION NUMERICA-S2 F-308;BASE DE DATOS-S2 DCI03;;;INFERECIA Y ESTADISTICA J-301;
-11:55 - 12:55;COMPUTACION NUMERICA-S2 F-308;BASE DE DATOS-S2 DCI03;;INVESTIGACION DE OPERACIONES F-202;INFERECIA Y ESTADISTICA J-301;
-13:10 - 14:10;;;;SISTEMAS OPERATIVOS-LAB2 DCI03;;
-14:30 - 15:30;COMPUTACION NUMERICA DCI03;;;;;
-15:35 - 16:35;COMPUTACION NUMERICA DCI03;TEORIA DE LA COMPUTACION-S2 DCI03;;SISTEMAS OPERATIVOS-S2 I-115;;
-16:50 - 17:50;;TEORIA DE LA COMPUTACION-S2 DCI03;;SISTEMAS OPERATIVOS-S2 I-115;;
-17:55 - 18:55;;TEORIA DE LA COMPUTACION-S2 DCI03;;;;
-19:10 - 20:10;;;;;;
+Hora;Lunes;Martes;Miércoles;Jueves;Viernes
+8:30 - 9:30;INF-412 Economía - Sala F-203 - José Lastra;INF-413 Diseño y Análisis de Algoritmos S1 - Sala I-109 - Sergio Hernández;INF-412 Economía - Sala F-203 - José Lastra;;INF-414 Sistemas de Información S2 - Sala F-103 - Nicolás Reyes
+9:35 - 10:35;INF-412 Economía - Sala X - José Lastra;INF-413 Diseño y Análisis de Algoritmos S1 - Sala I-109 - Sergio Hernández;INF-412 Economía - Sala F-203 - José Lastra;;INF-414 Sistemas de Información S2 - Sala F-103 - Nicolás Reyes
+10:50 - 11:50;INF-413 Diseño y Análisis de Algoritmos L1 - Laboratorio DCI03 - Sergio Hernández;;INF-414 Sistemas de Información S1 - Sala F-203 - Marco Toranzo;INF-411 Metodología de la Investigación S1 - Sala B-102 - Xaviera López;
+11:55 - 12:55;INF-413 Diseño y Análisis de Algoritmos L1 - Laboratorio DCI03 - Sergio Hernández;INF-415 Comunicación de Datos y Redes S1 - Sala B-118 - Fabián Tellier;INF-414 Sistemas de Información S1 - Sala F-203 - Marco Toranzo;INF-411 Metodología de la Investigación S1 - Sala B-102 - Xaviera López;INF-413 Diseño y Análisis de Algoritmos L2 - Laboratorio 19 - Sergio Hernández
+13:10 - 14:10;;INF-415 Comunicación de Datos y Redes S1 - Sala B-118 - Fabián Tellier;INF-414 Sistemas de Información S2 - Sala F-203 - Nicolás Reyes;INF-411 Metodología de la Investigación S1 - Sala B-102 - Xaviera López;INF-413 Diseño y Análisis de Algoritmos L2 - Laboratorio 19 - Sergio Hernández
+14:30 - 15:30;INF-413 Diseño y Análisis de Algoritmos S2 - Sala F-308 - Sergio Hernández;;INF-414 Sistemas de Información S2 - Sala F-203 - Nicolás Reyes;INF-414 Sistemas de Información S1 - Sala F-104 - Marco Toranzo;
+15:35 - 16:35;INF-413 Diseño y Análisis de Algoritmos S2 - Sala F-308 - Sergio Hernández;;;INF-414 Sistemas de Información S1 - Sala F-104 - Marco Toranzo;
+16:50 - 17:50;INF-415 Comunicación de Datos y Redes S1 - Sala B-102 - Fabián Tellier;;INF-413 Diseño y Análisis de Algoritmos L3 - Laboratorio 19 - Sergio Hernández;;
+17:55 - 18:55;INF-415 Comunicación de Datos y Redes S1 - Sala B-102 - Fabián Tellier;;INF-413 Diseño y Análisis de Algoritmos L3 - Laboratorio 19 - Sergio Hernández;;
+19:10 - 20:10;;;;;
