@@ -18,3 +18,5 @@ react-web/dist/
 react-web/dist-ssr/
 react-web/*.local
 
+node_modules
+dist/

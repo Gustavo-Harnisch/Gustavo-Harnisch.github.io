@@ -20,54 +20,24 @@ const LOGO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663765016861/Qc9Sk
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const REPOS = [
   {
-    name: "prometeo-ollama-local",
-    url: "https://github.com/Gustavo-Harnisch/prometeo-ollama-local",
-    desc: "Configuración e instalador interactivo para crear una IA local personalizada con Ollama y modelos qwen2.5-coder.",
-    lang: "Shell",
-    langColor: "#89e051",
-    topics: ["linux", "local-ai", "ollama", "qwen2-5"],
-    license: "MIT",
-    updated: "Mayo 2026",
-  },
-  {
-    name: "CRUD-oracle",
-    url: "https://github.com/Gustavo-Harnisch/CRUD-oracle",
-    desc: "CRUD full-stack: Oracle XE 21c + React + Node.js, con validación automática y conexión directa a Oracle. Listo para Linux.",
-    lang: "PLSQL",
-    langColor: "#e38c00",
-    topics: ["react", "oracle", "node-js", "oracle-xe-21c"],
-    license: null,
-    updated: "Dic 2025",
-  },
-  {
-    name: "Gustavo-Harnisch.github.io",
-    url: "https://github.com/Gustavo-Harnisch/Gustavo-Harnisch.github.io",
-    desc: "Repositorio para alojar diferentes proyectos y mostrarlos en página usando GitHub Pages.",
-    lang: "HTML",
-    langColor: "#e34c26",
-    topics: ["github-pages", "portfolio"],
+    name: "Horario",
+    url: "/Horario/",
+    desc: "Horario universitario publicado como página estática, con datos cargados desde CSV y diseño responsive para computador y celular.",
+    lang: "JavaScript",
+    langColor: "#f1e05a",
+    topics: ["html", "css", "javascript", "csv"],
     license: null,
     updated: "Mar 2026",
   },
   {
-    name: "Resolve",
-    url: "https://github.com/Gustavo-Harnisch/Resolve",
-    desc: "Proyecto de resolución de problemas computacionales.",
-    lang: null,
-    langColor: "#555",
-    topics: [],
+    name: "Pong",
+    url: "/pong/",
+    desc: "Remake simple del clásico Pong hecho con canvas, HTML, CSS y JavaScript.",
+    lang: "JavaScript",
+    langColor: "#f1e05a",
+    topics: ["game", "canvas", "html", "css"],
     license: null,
-    updated: "Oct 2025",
-  },
-  {
-    name: "sql_class",
-    url: "https://github.com/Gustavo-Harnisch/sql_class",
-    desc: "Material y ejercicios de clase de bases de datos SQL.",
-    lang: "SQL",
-    langColor: "#e38c00",
-    topics: ["sql", "database"],
-    license: null,
-    updated: "Jun 2025",
+    updated: "Jul 2025",
   },
 ];
 
@@ -251,7 +221,6 @@ function Sidebar({ active }: { active: string }) {
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function Home() {
   const [activeSection, setActiveSection] = useState("hero");
-  const [scrolled, setScrolled] = useState(false);
 
   // Typewriter for hero
   const line1 = useTypewriter("> Gustavo Harnisch", 55, 300);
@@ -261,7 +230,6 @@ export default function Home() {
   // Track active section
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
       const sections = NAV_ITEMS.map((n) => n.id);
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);

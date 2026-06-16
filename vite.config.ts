@@ -203,7 +203,39 @@ function vitePluginStorageProxy(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
+function vitePluginStaticProjectCopies(): Plugin {
+  const projectDirs = ["Horario", "pong"];
+
+  return {
+    name: "static-project-copies",
+    apply: "build",
+    closeBundle() {
+      const outDir = path.join(PROJECT_ROOT, "dist", "public");
+
+      for (const dirName of projectDirs) {
+        const source = path.join(PROJECT_ROOT, dirName);
+        const target = path.join(outDir, dirName);
+
+        if (!fs.existsSync(source)) {
+          continue;
+        }
+
+        fs.rmSync(target, { recursive: true, force: true });
+        fs.cpSync(source, target, { recursive: true });
+      }
+    },
+  };
+}
+
+const plugins = [
+  react(),
+  tailwindcss(),
+  jsxLocPlugin(),
+  vitePluginManusRuntime(),
+  vitePluginManusDebugCollector(),
+  vitePluginStorageProxy(),
+  vitePluginStaticProjectCopies(),
+];
 
 export default defineConfig({
   plugins,
