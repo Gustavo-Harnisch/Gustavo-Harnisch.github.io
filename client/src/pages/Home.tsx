@@ -1,5 +1,5 @@
 /**
- * NEOBRUTALIST CODE LAB — Home Page
+ * NEOBRUTALIST CODE LAB — Home Page (Mejorado)
  * Gustavo Harnisch Portfolio
  *
  * Design: Dark navy (#0a0e1a) + Cyan electric (#00d4ff) + Violet (#7c3aed)
@@ -13,31 +13,24 @@ import { motion, useInView } from "framer-motion";
 // ─── Asset URLs ───────────────────────────────────────────────────────────────
 const AVATAR = "https://avatars.githubusercontent.com/u/138950084?v=4";
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663765016861/Qc9SkAovmdDdxbFUoCGYKs/hero-bg-TioiuV4CZRkU49A6Amq4ai.webp";
-const ALGO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663765016861/Qc9SkAovmdDdxbFUoCGYKs/algo-visual-aghUAzeUu3X6uAkcCVBMhv.webp";
-const ICPC_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663765016861/Qc9SkAovmdDdxbFUoCGYKs/icpc-visual-eZsjcAehCbaSBCRAPjEKic.webp";
-const LOGO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663765016861/Qc9SkAovmdDdxbFUoCGYKs/logo-gh-RZEiXQpWZbQLFJVzuvJnKU.webp";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-const REPOS = [
+const PROJECTS = [
   {
     name: "Horario",
     url: "/Horario/",
-    desc: "Horario universitario publicado como página estática, con datos cargados desde CSV y diseño responsive para computador y celular.",
-    lang: "JavaScript",
-    langColor: "#f1e05a",
-    topics: ["html", "css", "javascript", "csv"],
-    license: null,
-    updated: "Mar 2026",
+    desc: "Horario universitario con datos en tiempo real, búsqueda avanzada y sincronización de calendario.",
+    icon: "📅",
+    color: "#f1e05a",
+    tags: ["HTML", "CSS", "JavaScript", "CSV"],
   },
   {
     name: "Pong",
     url: "/pong/",
-    desc: "Remake simple del clásico Pong hecho con canvas, HTML, CSS y JavaScript.",
-    lang: "JavaScript",
-    langColor: "#f1e05a",
-    topics: ["game", "canvas", "html", "css"],
-    license: null,
-    updated: "Jul 2025",
+    desc: "Juego clásico Pong remasterizado con canvas, física realista y controles responsivos.",
+    icon: "🎮",
+    color: "#61dafb",
+    tags: ["Canvas", "JavaScript", "Game Dev"],
   },
 ];
 
@@ -63,9 +56,9 @@ const STACK = [
 
 const NAV_ITEMS = [
   { id: "hero", label: "inicio", icon: "~" },
+  { id: "projects", label: "proyectos", icon: ">" },
   { id: "about", label: "sobre_mi", icon: "$" },
   { id: "interests", label: "intereses", icon: "#" },
-  { id: "repos", label: "proyectos", icon: ">" },
   { id: "icpc", label: "icpc", icon: "!" },
   { id: "contact", label: "contacto", icon: "@" },
 ];
@@ -322,23 +315,23 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="flex flex-wrap gap-4"
             >
+              <button
+                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+                className="flex items-center gap-2 px-6 py-3 bg-[#00d4ff] text-[#0a0e1a] font-mono-brand font-bold text-sm rounded hover:bg-[#00d4ff]/90 transition-all duration-200 active:scale-95"
+              >
+                explorar proyectos →
+              </button>
               <a
                 href="https://github.com/Gustavo-Harnisch"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 bg-[#00d4ff] text-[#0a0e1a] font-mono-brand font-bold text-sm rounded hover:bg-[#00d4ff]/90 transition-all duration-200 active:scale-95"
+                className="flex items-center gap-2 px-6 py-3 border border-[#1e293b] text-[#e2e8f0] font-mono-brand text-sm rounded hover:border-[#00d4ff]/40 hover:text-[#00d4ff] transition-all duration-200 active:scale-95"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
                 </svg>
-                $ git clone
+                GitHub
               </a>
-              <button
-                onClick={() => document.getElementById("repos")?.scrollIntoView({ behavior: "smooth" })}
-                className="flex items-center gap-2 px-6 py-3 border border-[#1e293b] text-[#e2e8f0] font-mono-brand text-sm rounded hover:border-[#00d4ff]/40 hover:text-[#00d4ff] transition-all duration-200 active:scale-95"
-              >
-                ver proyectos →
-              </button>
             </motion.div>
           </div>
 
@@ -358,6 +351,83 @@ export default function Home() {
           </motion.div>
         </section>
 
+        {/* ── PROJECTS ────────────────────────────────────────────────── */}
+        <section id="projects" className="py-24 px-8 md:px-16 border-t border-[#1e293b]">
+          <RevealSection>
+            <div className="flex items-center gap-3 mb-12">
+              <span className="font-mono-brand text-[#00d4ff] text-sm">&gt;</span>
+              <h2 className="font-display text-3xl md:text-4xl font-bold">Proyectos</h2>
+              <div className="flex-1 h-px bg-gradient-to-r from-[#1e293b] to-transparent ml-4" />
+            </div>
+          </RevealSection>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
+            {PROJECTS.map((project, i) => (
+              <RevealSection key={project.name} delay={i * 0.15}>
+                <a
+                  href={project.url}
+                  className="group block relative h-full"
+                >
+                  {/* Card */}
+                  <div className="relative h-full border border-[#1e293b] rounded-lg p-8 bg-[#111827]/50 card-hover overflow-hidden">
+                    {/* Gradient accent */}
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{
+                        background: `radial-gradient(circle at top right, ${project.color}15, transparent)`,
+                      }}
+                    />
+
+                    {/* Content */}
+                    <div className="relative z-10">
+                      {/* Icon + Title */}
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <div className="text-4xl mb-3">{project.icon}</div>
+                          <h3 className="font-display text-2xl font-bold text-[#e2e8f0] group-hover:text-[#00d4ff] transition-colors">
+                            {project.name}
+                          </h3>
+                        </div>
+                        <svg className="w-5 h-5 text-[#64748b] group-hover:text-[#00d4ff] transition-colors flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-[#94a3b8] text-sm leading-relaxed mb-6 font-display">
+                        {project.desc}
+                      </p>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="tech-badge text-xs"
+                            style={{
+                              borderColor: `${project.color}40`,
+                              color: project.color,
+                              background: `${project.color}08`,
+                            }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Bottom accent line */}
+                      <div
+                        className="absolute bottom-0 left-0 h-0.5 w-0 group-hover:w-full transition-all duration-500"
+                        style={{ background: project.color }}
+                      />
+                    </div>
+                  </div>
+                </a>
+              </RevealSection>
+            ))}
+          </div>
+        </section>
+
         {/* ── ABOUT ───────────────────────────────────────────────────── */}
         <section id="about" className="py-24 px-8 md:px-16 border-t border-[#1e293b]">
           <RevealSection>
@@ -368,7 +438,7 @@ export default function Home() {
             </div>
           </RevealSection>
 
-          <div className="grid md:grid-cols-2 gap-12 items-start">
+          <div className="grid md:grid-cols-2 gap-12 items-start max-w-4xl">
             <RevealSection delay={0.1}>
               <div className="space-y-6">
                 <div className="border border-[#1e293b] rounded-lg p-6 bg-[#111827]/50 card-hover">
@@ -388,15 +458,6 @@ export default function Home() {
   "estado": "Working hard 🌱"
 }`}
                   </pre>
-                </div>
-
-                <div className="border border-[#1e293b] rounded-lg p-6 bg-[#111827]/50 card-hover">
-                  <div className="font-mono-brand text-xs text-[#64748b] mb-3">// enfoque_academico.md</div>
-                  <p className="text-[#94a3b8] text-sm leading-relaxed font-display">
-                    Las matemáticas no son un fin en sí mismas, sino el lenguaje con el que se construyen
-                    los mejores sistemas. Mi interés en ecuaciones diferenciales, álgebra lineal y estadística
-                    tiene una orientación directa hacia aplicaciones de ingeniería y modelos de ML.
-                  </p>
                 </div>
               </div>
             </RevealSection>
@@ -422,16 +483,8 @@ export default function Home() {
                 {/* Stats */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="border border-[#1e293b] rounded-lg p-5 bg-[#111827]/50 text-center card-hover">
-                    <div className="font-mono-brand text-3xl font-bold text-[#00d4ff] glow-cyan-text">165</div>
-                    <div className="font-mono-brand text-xs text-[#64748b] mt-1">contribuciones / año</div>
-                  </div>
-                  <div className="border border-[#1e293b] rounded-lg p-5 bg-[#111827]/50 text-center card-hover">
-                    <div className="font-mono-brand text-3xl font-bold text-[#7c3aed]">8</div>
-                    <div className="font-mono-brand text-xs text-[#64748b] mt-1">repositorios</div>
-                  </div>
-                  <div className="border border-[#1e293b] rounded-lg p-5 bg-[#111827]/50 text-center card-hover">
                     <div className="font-mono-brand text-3xl font-bold text-[#00d4ff] glow-cyan-text">4x</div>
-                    <div className="font-mono-brand text-xs text-[#64748b] mt-1">ICPC representando UCM</div>
+                    <div className="font-mono-brand text-xs text-[#64748b] mt-1">ICPC</div>
                   </div>
                   <div className="border border-[#1e293b] rounded-lg p-5 bg-[#111827]/50 text-center card-hover">
                     <div className="font-mono-brand text-3xl font-bold text-[#7c3aed]">∞</div>
@@ -444,194 +497,91 @@ export default function Home() {
         </section>
 
         {/* ── INTERESTS ───────────────────────────────────────────────── */}
-        <section id="interests" className="py-24 px-8 md:px-16 border-t border-[#1e293b] relative overflow-hidden">
-          {/* Background image */}
-          <div className="absolute inset-0 z-0">
-            <img src={ALGO_IMG} alt="" className="w-full h-full object-cover opacity-10" />
-            <div className="absolute inset-0 bg-[#0a0e1a]/85" />
-          </div>
-
-          <div className="relative z-10">
-            <RevealSection>
-              <div className="flex items-center gap-3 mb-12">
-                <span className="font-mono-brand text-[#7c3aed] text-sm">#</span>
-                <h2 className="font-display text-3xl md:text-4xl font-bold">Áreas de Interés</h2>
-                <div className="flex-1 h-px bg-gradient-to-r from-[#1e293b] to-transparent ml-4" />
-              </div>
-            </RevealSection>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {INTERESTS.map((item, i) => (
-                <RevealSection key={item.label} delay={i * 0.08}>
-                  <div
-                    className="border border-[#1e293b] rounded-lg p-6 bg-[#111827]/70 card-hover group cursor-default"
-                    style={{ borderColor: `${item.color}20` }}
-                  >
-                    <div
-                      className="text-3xl mb-3 font-mono-brand"
-                      style={{ color: item.color }}
-                    >
-                      {item.icon}
-                    </div>
-                    <div className="font-display font-semibold text-[#e2e8f0] group-hover:text-white transition-colors">
-                      {item.label}
-                    </div>
-                    <div
-                      className="mt-2 h-px w-0 group-hover:w-full transition-all duration-500"
-                      style={{ background: `linear-gradient(to right, ${item.color}60, transparent)` }}
-                    />
-                  </div>
-                </RevealSection>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── REPOS ───────────────────────────────────────────────────── */}
-        <section id="repos" className="py-24 px-8 md:px-16 border-t border-[#1e293b]">
+        <section id="interests" className="py-24 px-8 md:px-16 border-t border-[#1e293b]">
           <RevealSection>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="font-mono-brand text-[#00d4ff] text-sm">&gt;</span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold">Proyectos</h2>
+            <div className="flex items-center gap-3 mb-12">
+              <span className="font-mono-brand text-[#7c3aed] text-sm">#</span>
+              <h2 className="font-display text-3xl md:text-4xl font-bold">Áreas de Interés</h2>
               <div className="flex-1 h-px bg-gradient-to-r from-[#1e293b] to-transparent ml-4" />
             </div>
-            <p className="font-mono-brand text-xs text-[#64748b] mb-12 ml-6">
-              $ ls -la ~/github/Gustavo-Harnisch/
-            </p>
           </RevealSection>
 
-          <div className="grid md:grid-cols-2 gap-4">
-            {REPOS.map((repo, i) => (
-              <RevealSection key={repo.name} delay={i * 0.1}>
-                <a
-                  href={repo.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block border border-[#1e293b] rounded-lg p-6 bg-[#111827]/50 card-hover group"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl">
+            {INTERESTS.map((item, i) => (
+              <RevealSection key={item.label} delay={i * 0.08}>
+                <div
+                  className="border border-[#1e293b] rounded-lg p-6 bg-[#111827]/70 card-hover group cursor-default"
+                  style={{ borderColor: `${item.color}20` }}
                 >
-                  {/* Header */}
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      <svg className="w-4 h-4 text-[#64748b] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h8M8 8h4" />
-                      </svg>
-                      <span className="font-mono-brand text-sm font-bold text-[#00d4ff] group-hover:text-[#00d4ff]/80 transition-colors">
-                        {repo.name}
-                      </span>
-                    </div>
-                    <svg className="w-4 h-4 text-[#64748b] group-hover:text-[#00d4ff] transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
+                  <div
+                    className="text-3xl mb-3 font-mono-brand"
+                    style={{ color: item.color }}
+                  >
+                    {item.icon}
                   </div>
-
-                  {/* Description */}
-                  <p className="text-[#94a3b8] text-sm leading-relaxed mb-4 font-display">
-                    {repo.desc}
-                  </p>
-
-                  {/* Topics */}
-                  {repo.topics.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {repo.topics.map((t) => (
-                        <span key={t} className="tech-badge text-xs">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Footer */}
-                  <div className="flex items-center gap-4 text-xs font-mono-brand text-[#64748b]">
-                    {repo.lang && (
-                      <span className="flex items-center gap-1.5">
-                        <span
-                          className="w-2.5 h-2.5 rounded-full"
-                          style={{ backgroundColor: repo.langColor }}
-                        />
-                        {repo.lang}
-                      </span>
-                    )}
-                    {repo.license && <span>{repo.license}</span>}
-                    <span className="ml-auto">{repo.updated}</span>
+                  <div className="font-display font-semibold text-[#e2e8f0] group-hover:text-white transition-colors">
+                    {item.label}
                   </div>
-                </a>
+                  <div
+                    className="mt-2 h-px w-0 group-hover:w-full transition-all duration-500"
+                    style={{ background: `linear-gradient(to right, ${item.color}60, transparent)` }}
+                  />
+                </div>
               </RevealSection>
             ))}
           </div>
-
-          <RevealSection delay={0.5}>
-            <div className="mt-8 text-center">
-              <a
-                href="https://github.com/Gustavo-Harnisch?tab=repositories"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-mono-brand text-sm text-[#64748b] hover:text-[#00d4ff] transition-colors"
-              >
-                ver todos los repositorios →
-              </a>
-            </div>
-          </RevealSection>
         </section>
 
         {/* ── ICPC ────────────────────────────────────────────────────── */}
-        <section id="icpc" className="py-24 px-8 md:px-16 border-t border-[#1e293b] relative overflow-hidden">
-          {/* Background */}
-          <div className="absolute inset-0 z-0">
-            <img src={ICPC_IMG} alt="" className="w-full h-full object-cover opacity-15" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a] to-[#0a0e1a]/70" />
-          </div>
+        <section id="icpc" className="py-24 px-8 md:px-16 border-t border-[#1e293b]">
+          <RevealSection>
+            <div className="flex items-center gap-3 mb-12">
+              <span className="font-mono-brand text-[#00d4ff] text-sm">!</span>
+              <h2 className="font-display text-3xl md:text-4xl font-bold">Competencia Algorítmica</h2>
+              <div className="flex-1 h-px bg-gradient-to-r from-[#1e293b] to-transparent ml-4" />
+            </div>
+          </RevealSection>
 
-          <div className="relative z-10">
-            <RevealSection>
-              <div className="flex items-center gap-3 mb-12">
-                <span className="font-mono-brand text-[#00d4ff] text-sm">!</span>
-                <h2 className="font-display text-3xl md:text-4xl font-bold">Competencia Algorítmica</h2>
-                <div className="flex-1 h-px bg-gradient-to-r from-[#1e293b] to-transparent ml-4" />
+          <div className="grid md:grid-cols-2 gap-8 items-center max-w-4xl">
+            <RevealSection delay={0.1}>
+              <div className="space-y-6">
+                <div className="border border-[#00d4ff]/20 rounded-lg p-6 bg-[#111827]/80 glow-cyan">
+                  <table className="w-full font-mono-brand text-sm">
+                    <tbody>
+                      <tr className="border-b border-[#1e293b]">
+                        <td className="py-3 text-[#64748b]">Competición</td>
+                        <td className="py-3 text-[#00d4ff] font-bold text-right">ICPC</td>
+                      </tr>
+                      <tr className="border-b border-[#1e293b]">
+                        <td className="py-3 text-[#64748b]">Participaciones</td>
+                        <td className="py-3 text-[#e2e8f0] text-right">4 veces</td>
+                      </tr>
+                      <tr>
+                        <td className="py-3 text-[#64748b]">Representando</td>
+                        <td className="py-3 text-[#e2e8f0] text-right">UCM</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <blockquote className="border-l-2 border-[#00d4ff] pl-4">
+                  <p className="font-display text-[#94a3b8] italic text-sm leading-relaxed">
+                    "No compito para ganar medallas — todavía. El objetivo es claro: llegar al podio
+                    representando a la UCM. Cada contest es un paso hacia eso."
+                  </p>
+                </blockquote>
               </div>
             </RevealSection>
 
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <RevealSection delay={0.1}>
-                <div className="space-y-6">
-                  <div className="border border-[#00d4ff]/20 rounded-lg p-6 bg-[#111827]/80 glow-cyan">
-                    <table className="w-full font-mono-brand text-sm">
-                      <tbody>
-                        <tr className="border-b border-[#1e293b]">
-                          <td className="py-3 text-[#64748b]">Competición</td>
-                          <td className="py-3 text-[#00d4ff] font-bold text-right">ICPC</td>
-                        </tr>
-                        <tr className="border-b border-[#1e293b]">
-                          <td className="py-3 text-[#64748b]">Participaciones</td>
-                          <td className="py-3 text-[#e2e8f0] text-right">4 veces</td>
-                        </tr>
-                        <tr>
-                          <td className="py-3 text-[#64748b]">Representando</td>
-                          <td className="py-3 text-[#e2e8f0] text-right">UCM</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <blockquote className="border-l-2 border-[#00d4ff] pl-4">
-                    <p className="font-display text-[#94a3b8] italic text-sm leading-relaxed">
-                      "No compito para ganar medallas — todavía. El objetivo es claro: llegar al podio
-                      representando a la UCM. Cada contest es un paso hacia eso."
-                    </p>
-                  </blockquote>
-                </div>
-              </RevealSection>
-
-              <RevealSection delay={0.2}>
-                <div className="border border-[#1e293b] rounded-lg p-6 bg-[#111827]/70 card-hover">
-                  <div className="font-mono-brand text-xs text-[#64748b] mb-4">// icpc_mindset.py</div>
-                  <pre className="font-mono-brand text-xs text-[#e2e8f0] leading-relaxed overflow-x-auto">
+            <RevealSection delay={0.2}>
+              <div className="border border-[#1e293b] rounded-lg p-6 bg-[#111827]/70 card-hover">
+                <div className="font-mono-brand text-xs text-[#64748b] mb-4">// icpc_mindset.py</div>
+                <pre className="font-mono-brand text-xs text-[#e2e8f0] leading-relaxed overflow-x-auto">
 {`class ICPCCompetitor:
     def __init__(self):
         self.university = "UCM"
         self.participations = 4
         self.goal = "podio"
-        self.mindset = "cada_contest_cuenta"
     
     def compete(self, contest):
         strategy = self.analyze(contest)
@@ -639,7 +589,6 @@ export default function Home() {
         return self.submit(solution)
     
     def analyze(self, problem):
-        # Entender desde los fundamentos
         return optimal_approach(problem)
     
     # En progreso...
@@ -647,11 +596,10 @@ export default function Home() {
         while not self.at_podio():
             self.practice()
             self.learn()
-            self.compete(next_contest())`}
-                  </pre>
-                </div>
-              </RevealSection>
-            </div>
+            self.compete()`}
+                </pre>
+              </div>
+            </RevealSection>
           </div>
         </section>
 
@@ -690,26 +638,6 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                   </a>
-
-                  <a
-                    href="https://github.com/Gustavo-Harnisch/Gustavo-Harnisch.github.io"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 rounded border border-[#1e293b] hover:border-[#7c3aed]/30 hover:bg-[#7c3aed]/5 transition-all group"
-                  >
-                    <svg className="w-5 h-5 text-[#64748b] group-hover:text-[#7c3aed] transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                    </svg>
-                    <div>
-                      <div className="font-mono-brand text-sm text-[#e2e8f0] group-hover:text-[#7c3aed] transition-colors">
-                        GitHub Pages
-                      </div>
-                      <div className="font-mono-brand text-xs text-[#64748b]">Gustavo-Harnisch.github.io</div>
-                    </div>
-                    <svg className="w-4 h-4 text-[#64748b] group-hover:text-[#7c3aed] ml-auto transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
                 </div>
 
                 <div className="mt-8 pt-6 border-t border-[#1e293b]">
@@ -726,7 +654,6 @@ export default function Home() {
         <footer className="py-8 px-8 md:px-16 border-t border-[#1e293b]">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <img src={LOGO_IMG} alt="<GH/>" className="w-6 h-6 object-contain" />
               <span className="font-mono-brand text-xs text-[#64748b]">
                 Gustavo Harnisch · UCM · Talca, Chile
               </span>
