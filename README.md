@@ -4,97 +4,91 @@
 
 Sitio web construido como una experiencia de una sola pagina, con navegacion lateral, animaciones suaves y una estetica tecnica inspirada en terminales, codigo y competencia algoritmica.
 
-## Diseno
+## Sitio
 
-- **Paleta:** azul noche profundo (`#0a0e1a`), cian electrico (`#00d4ff`) y violeta (`#7c3aed`)
-- **Tipografia:** `Syne` para textos display y `JetBrains Mono` para bloques tecnicos
-- **Animaciones:** efecto typewriter en el hero, aparicion progresiva de secciones y brillo sutil en elementos destacados
-- **Layout:** sidebar fija con avatar de GitHub, navegacion por secciones y contenido principal responsive
+[Abrir GitHub Pages](https://gustavo-harnisch.github.io/)
 
-## Secciones
+## Vista rapida
 
-1. **Inicio** - Hero con efecto typewriter, enlaces a GitHub y acceso directo a proyectos
-2. **Sobre mi** - Perfil en formato JSON, stack tecnologico y estadisticas personales
-3. **Areas de interes** - Machine Learning, inteligencia artificial, algoritmos y matematicas aplicadas
-4. **Proyectos** - Accesos a proyectos publicados dentro del sitio
-5. **ICPC** - Experiencia en competencia algoritmica representando a la UCM
-6. **Contacto** - Enlaces a GitHub y al repositorio del sitio
+- Portafolio de una sola pagina para presentar perfil academico, proyectos e intereses tecnicos.
+- Interfaz responsive con tema oscuro, sidebar fija y navegacion por secciones.
+- Proyectos adicionales publicados como paginas estaticas dentro del mismo dominio.
 
-## Stack
+## Contenido
 
-- **Frontend:** React 19 + TypeScript
-- **Estilos:** Tailwind CSS 4 + CSS personalizado
-- **Animaciones:** Framer Motion
-- **Routing:** Wouter
-- **Build:** Vite
-- **Servidor:** Express para servir el build de produccion
+- **Inicio:** presentacion principal y enlaces rapidos.
+- **Sobre mi:** perfil, stack tecnologico y datos destacados.
+- **Areas de interes:** algoritmos, aprendizaje automatico y matematicas aplicadas.
+- **Proyectos:** accesos a trabajos publicados en el sitio.
+- **ICPC:** experiencia en competencia algoritmica representando a la UCM.
+- **Contacto:** enlaces a GitHub y al repositorio.
 
-## Desarrollo
+## Proyectos incluidos
+
+| Proyecto | Ruta | Descripcion |
+| --- | --- | --- |
+| Horario | [`/Horario/`](https://gustavo-harnisch.github.io/Horario/) | Horario universitario publicado como pagina estatica, con datos cargados desde CSV. |
+| Pong | [`/pong/`](https://gustavo-harnisch.github.io/pong/) | Remake simple del clasico Pong usando canvas, HTML, CSS y JavaScript. |
+
+## Tecnologias
+
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- Wouter
+- Vite
+- Express
+
+## Desarrollo local
 
 ```bash
-# Instalar dependencias
+git clone https://github.com/Gustavo-Harnisch/Gustavo-Harnisch.github.io.git
+cd Gustavo-Harnisch.github.io
 pnpm install
-
-# Iniciar servidor de desarrollo
 pnpm dev
-
-# Revisar tipos
-pnpm check
-
-# Build para produccion
-pnpm build
-
-# Ejecutar build de produccion
-pnpm start
 ```
+
+El servidor de desarrollo queda disponible normalmente en `http://localhost:3000/`.
+
+## Scripts
+
+| Comando | Uso |
+| --- | --- |
+| `pnpm dev` | Inicia Vite en modo desarrollo. |
+| `pnpm check` | Revisa tipos con TypeScript. |
+| `pnpm build` | Genera el build de produccion. |
+| `pnpm preview` | Sirve una vista previa del build frontend. |
+| `pnpm start` | Ejecuta el servidor Express sobre `dist/`. |
 
 ## Estructura
 
 ```text
-client/
-  src/
-    pages/
-      Home.tsx          # Pagina principal del portafolio
-      NotFound.tsx      # Pagina 404
-    components/         # Componentes reutilizables y UI
-    contexts/           # Theme provider
-    index.css           # Tema Neobrutalist + utilidades custom
-    App.tsx             # Configuracion de rutas
-
-server/
-  index.ts              # Servidor Express para produccion
-
-shared/
-  const.ts              # Constantes compartidas
-
-Horario/                # Proyecto estatico publicado en /Horario/
-pong/                   # Juego Pong publicado en /pong/
+.
+|-- client/              # Aplicacion React
+|   `-- src/
+|       |-- pages/       # Home y NotFound
+|       |-- components/  # Componentes reutilizables
+|       |-- contexts/    # Configuracion de tema
+|       `-- index.css    # Estilos globales
+|-- server/              # Servidor Express para produccion
+|-- shared/              # Codigo compartido
+|-- Horario/             # Pagina estatica publicada en /Horario/
+|-- pong/                # Juego publicado en /pong/
+`-- vite.config.ts       # Configuracion de build
 ```
 
-## Caracteristicas
+## Build
 
-- Efecto typewriter en el titulo principal
-- Fondo visual con imagen y detalles de codigo
-- Navegacion lateral con indicador de seccion activa
-- Scroll suave entre secciones
-- Componentes responsive para escritorio y mobile
-- Tarjetas de proyectos con lenguaje, topics y fechas
-- Seccion ICPC con enfoque competitivo y snippet estilo Python
-- Build de produccion listo para GitHub Pages o servidor estatico
+```bash
+pnpm check
+pnpm build
+```
 
-## Notas
-
-- Los proyectos `Horario` y `pong` se copian al build final durante `pnpm build`.
-- Las imagenes principales y el avatar se cargan desde URLs externas.
-- El sitio esta pensado como portafolio personal y vitrina de proyectos.
-- La carpeta `dist/` corresponde al resultado compilado.
+El build queda en `dist/`. Durante la compilacion se copian tambien los proyectos `Horario` y `pong` al resultado final.
 
 ## Autor
 
 **Gustavo Harnisch**  
 Estudiante de Ingenieria Civil Informatica - UCM - Talca, Chile  
 [GitHub](https://github.com/Gustavo-Harnisch)
-
----
-
-Construido con React, TypeScript, Tailwind CSS y cafe.
