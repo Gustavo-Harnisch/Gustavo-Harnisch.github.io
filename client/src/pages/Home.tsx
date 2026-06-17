@@ -7,7 +7,7 @@
  * Layout: Sidebar nav + main content, asymmetric
  */
 
-import { useEffect, useRef, useState } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 // ─── Asset URLs ───────────────────────────────────────────────────────────────
@@ -164,7 +164,7 @@ function Sidebar({ active }: { active: string }) {
       <div className="flex items-center justify-center md:justify-start gap-3 px-3 md:px-5 py-6 border-b border-[#1e293b]">
         <div className="relative flex-shrink-0">
           <img src={AVATAR} alt="Gustavo Harnisch" className="w-8 h-8 rounded-full border border-[#00d4ff]/30" />
-          <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#00d4ff] border border-[#0a0e1a]" />
+          <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#22c55e] border border-[#0a0e1a]" />
         </div>
         <div className="hidden md:block">
           <div className="font-mono-brand text-xs text-[#00d4ff] font-bold">&lt;GH/&gt;</div>
@@ -343,11 +343,17 @@ export default function Home() {
             className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
           >
             <span className="font-mono-brand text-xs text-[#64748b]">scroll</span>
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
+            <motion.svg
+              animate={{ y: [0, 6, 0], opacity: [0.45, 1, 0.45] }}
               transition={{ repeat: Infinity, duration: 1.5 }}
-              className="w-px h-8 bg-gradient-to-b from-[#00d4ff]/40 to-transparent"
-            />
+              className="h-6 w-6 text-[#00d4ff]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 9l6 6 6-6" />
+            </motion.svg>
           </motion.div>
         </section>
 
@@ -369,7 +375,10 @@ export default function Home() {
                   className="group block relative h-full"
                 >
                   {/* Card */}
-                  <div className="relative h-full border border-[#1e293b] rounded-lg p-8 bg-[#111827]/50 card-hover overflow-hidden">
+                  <div
+                    className="project-card relative h-full border border-[#1e293b] rounded-lg p-8 bg-[#111827]/50 card-hover overflow-hidden"
+                    style={{ "--project-color": project.color } as CSSProperties}
+                  >
                     {/* Gradient accent */}
                     <div
                       className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -459,6 +468,15 @@ export default function Home() {
 }`}
                   </pre>
                 </div>
+
+                <div className="border border-[#1e293b] rounded-lg p-6 bg-[#111827]/50 card-hover">
+                  <div className="font-mono-brand text-xs text-[#64748b] mb-3">// enfoque_academico.md</div>
+                  <p className="text-[#94a3b8] text-sm leading-relaxed font-display">
+                    Las matemáticas son una herramienta para entender, modelar y construir sistemas.
+                    Mi foco está en conectar fundamentos como álgebra lineal, estadística y algoritmos
+                    con implementaciones prácticas en ingeniería y aprendizaje automático.
+                  </p>
+                </div>
               </div>
             </RevealSection>
 
@@ -485,6 +503,14 @@ export default function Home() {
                   <div className="border border-[#1e293b] rounded-lg p-5 bg-[#111827]/50 text-center card-hover">
                     <div className="font-mono-brand text-3xl font-bold text-[#00d4ff] glow-cyan-text">4x</div>
                     <div className="font-mono-brand text-xs text-[#64748b] mt-1">ICPC</div>
+                  </div>
+                  <div className="border border-[#1e293b] rounded-lg p-5 bg-[#111827]/50 text-center card-hover">
+                    <div className="font-mono-brand text-3xl font-bold text-[#7c3aed]">8</div>
+                    <div className="font-mono-brand text-xs text-[#64748b] mt-1">repositorios</div>
+                  </div>
+                  <div className="border border-[#1e293b] rounded-lg p-5 bg-[#111827]/50 text-center card-hover">
+                    <div className="font-mono-brand text-3xl font-bold text-[#00d4ff] glow-cyan-text">165</div>
+                    <div className="font-mono-brand text-xs text-[#64748b] mt-1">contribuciones / año</div>
                   </div>
                   <div className="border border-[#1e293b] rounded-lg p-5 bg-[#111827]/50 text-center card-hover">
                     <div className="font-mono-brand text-3xl font-bold text-[#7c3aed]">∞</div>
@@ -635,6 +661,26 @@ export default function Home() {
                       <div className="font-mono-brand text-xs text-[#64748b]">GitHub Profile</div>
                     </div>
                     <svg className="w-4 h-4 text-[#64748b] group-hover:text-[#00d4ff] ml-auto transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+
+                  <a
+                    href="https://gustavo-harnisch.github.io/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 p-4 rounded border border-[#1e293b] hover:border-[#7c3aed]/30 hover:bg-[#7c3aed]/5 transition-all group"
+                  >
+                    <svg className="w-5 h-5 text-[#64748b] group-hover:text-[#7c3aed] transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    </svg>
+                    <div>
+                      <div className="font-mono-brand text-sm text-[#e2e8f0] group-hover:text-[#7c3aed] transition-colors">
+                        gustavo-harnisch.github.io
+                      </div>
+                      <div className="font-mono-brand text-xs text-[#64748b]">GitHub Pages</div>
+                    </div>
+                    <svg className="w-4 h-4 text-[#64748b] group-hover:text-[#7c3aed] ml-auto transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                   </a>

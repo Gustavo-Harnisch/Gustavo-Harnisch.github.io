@@ -302,6 +302,10 @@
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 212, 255, 0.1);
     border-color: rgba(0, 212, 255, 0.3) !important;
   }
+
+  .project-card:hover {
+    border-color: color-mix(in srgb, var(--project-color) 70%, transparent) !important;
+  }
   
   /* Tech badge */
   .tech-badge {
