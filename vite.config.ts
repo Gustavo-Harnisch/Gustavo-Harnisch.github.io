@@ -205,10 +205,73 @@ function vitePluginStorageProxy(): Plugin {
 
 function vitePluginStaticProjectCopies(): Plugin {
   const projectDirs = ["Horario", "pong"];
+  const contentTypes: Record<string, string> = {
+    ".css": "text/css; charset=utf-8",
+    ".csv": "text/csv; charset=utf-8",
+    ".html": "text/html; charset=utf-8",
+    ".ico": "image/x-icon",
+    ".js": "text/javascript; charset=utf-8",
+    ".json": "application/json; charset=utf-8",
+    ".png": "image/png",
+    ".svg": "image/svg+xml; charset=utf-8",
+    ".txt": "text/plain; charset=utf-8",
+  };
+
+  function findStaticProjectRequest(url = "/") {
+    const pathname = decodeURIComponent(new URL(url, "http://localhost").pathname);
+
+    for (const dirName of projectDirs) {
+      if (pathname === `/${dirName}` || pathname.startsWith(`/${dirName}/`)) {
+        return {
+          dirName,
+          relativePath: pathname.slice(dirName.length + 2),
+        };
+      }
+    }
+
+    return null;
+  }
 
   return {
     name: "static-project-copies",
-    apply: "build",
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const match = findStaticProjectRequest(req.url);
+
+        if (!match) {
+          return next();
+        }
+
+        const projectRoot = path.join(PROJECT_ROOT, match.dirName);
+        const normalizedRelativePath = path.normalize(match.relativePath || "index.html");
+
+        if (normalizedRelativePath.startsWith("..") || path.isAbsolute(normalizedRelativePath)) {
+          res.writeHead(400, { "Content-Type": "text/plain; charset=utf-8" });
+          res.end("Invalid static project path");
+          return;
+        }
+
+        let filePath = path.join(projectRoot, normalizedRelativePath);
+
+        try {
+          const stats = fs.existsSync(filePath) ? fs.statSync(filePath) : null;
+
+          if (stats?.isDirectory()) {
+            filePath = path.join(filePath, "index.html");
+          }
+
+          if (!fs.existsSync(filePath) || !fs.statSync(filePath).isFile()) {
+            return next();
+          }
+
+          const contentType = contentTypes[path.extname(filePath).toLowerCase()] || "application/octet-stream";
+          res.writeHead(200, { "Content-Type": contentType });
+          fs.createReadStream(filePath).pipe(res);
+        } catch {
+          return next();
+        }
+      });
+    },
     closeBundle() {
       const outDir = path.join(PROJECT_ROOT, "dist", "public");
 
