@@ -286,6 +286,23 @@ function vitePluginStaticProjectCopies(): Plugin {
         fs.rmSync(target, { recursive: true, force: true });
         fs.cpSync(source, target, { recursive: true });
       }
+
+      // GitHub Pages can also be configured as "Deploy from branch".
+      // Keep a root-level fallback in sync so that mode serves the app instead of README.md.
+      const rootAssets = path.join(PROJECT_ROOT, "assets");
+      const builtAssets = path.join(outDir, "assets");
+      const builtIndex = path.join(outDir, "index.html");
+
+      if (fs.existsSync(builtIndex)) {
+        fs.copyFileSync(builtIndex, path.join(PROJECT_ROOT, "index.html"));
+      }
+
+      if (fs.existsSync(builtAssets)) {
+        fs.rmSync(rootAssets, { recursive: true, force: true });
+        fs.cpSync(builtAssets, rootAssets, { recursive: true });
+      }
+
+      fs.writeFileSync(path.join(PROJECT_ROOT, ".nojekyll"), "");
     },
   };
 }
