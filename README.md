@@ -1,8 +1,8 @@
 # Gustavo Harnisch - Portfolio
 
-**Neobrutalist Code Lab** - Portafolio personal de Gustavo Harnisch, estudiante de Ingenieria Civil Informatica en la UCM.
+Portafolio personal de Gustavo Harnisch, estudiante de Ingenieria Civil Informatica orientado al area de datos, Business Intelligence, SQL y bases de datos.
 
-Sitio web construido como una experiencia de una sola pagina, con navegacion lateral, animaciones suaves y una estetica tecnica inspirada en terminales, codigo y competencia algoritmica.
+El sitio presenta perfil, proyectos y formas de contacto en una experiencia de una sola pagina construida con React, Vite y GitHub Pages. Tambien conserva proyectos estaticos publicados dentro del mismo dominio, como Horario y Pong.
 
 ## Sitio
 
@@ -10,18 +10,17 @@ Sitio web construido como una experiencia de una sola pagina, con navegacion lat
 
 ## Vista rapida
 
-- Portafolio de una sola pagina para presentar perfil academico, proyectos e intereses tecnicos.
-- Interfaz responsive con tema oscuro, sidebar fija y navegacion por secciones.
+- Portafolio de una sola pagina para presentar perfil academico, enfoque de datos, proyectos e intereses tecnicos.
+- Interfaz responsive con tema oscuro, navegacion superior y tarjetas de proyectos.
 - Proyectos adicionales publicados como paginas estaticas dentro del mismo dominio.
 
 ## Contenido
 
-- **Inicio:** presentacion principal y enlaces rapidos.
+- **Inicio:** presentacion principal con foco en datos y BI.
 - **Sobre mi:** perfil, stack tecnologico y datos destacados.
-- **Areas de interes:** algoritmos, aprendizaje automatico y matematicas aplicadas.
+- **Areas de interes:** Business Intelligence, SQL, modelado de datos, dashboards y bases de datos.
 - **Proyectos:** accesos a trabajos publicados en el sitio.
-- **ICPC:** experiencia en competencia algoritmica representando a la UCM.
-- **Contacto:** enlaces a GitHub y al repositorio.
+- **Contacto:** enlaces a GitHub, GitHub Pages, email y LinkedIn.
 
 ## Proyectos incluidos
 
@@ -91,4 +90,6 @@ El build queda en `dist/`. Durante la compilacion se copian tambien los proyecto
 
 **Gustavo Harnisch**  
 Estudiante de Ingenieria Civil Informatica - UCM - Talca, Chile  
-[GitHub](https://github.com/Gustavo-Harnisch)
+[GitHub](https://github.com/Gustavo-Harnisch)  
+[LinkedIn](https://www.linkedin.com/in/gustavo-ivar-gallegos-harnisch/)  
+[Email](mailto:gusharnisch2004@gmail.com)

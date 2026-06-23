@@ -11,6 +11,7 @@ import {
   Github,
   Globe2,
   GraduationCap,
+  Linkedin,
   Mail,
   MapPin,
   Sparkles,
@@ -80,10 +81,10 @@ const PROJECTS: Project[] = [
   {
     name: "CRUD Oracle",
     description:
-      "Aplicacion full-stack con Oracle XE 21c, React y Node.js para practicar validaciones y persistencia real.",
+      "Plataforma full-stack con Oracle XE 21c, React y Node.js para practicar validaciones, persistencia y conexion directa a una base relacional.",
     href: "https://github.com/Gustavo-Harnisch/CRUD-oracle",
     language: "PLSQL - React - Node.js",
-    tags: ["Full-stack", "Oracle", "React"],
+    tags: ["Data", "Oracle", "React"],
     icon: Database,
     accent: "#fb7185",
     featured: true,
@@ -121,27 +122,28 @@ const PROJECTS: Project[] = [
 ];
 
 const STACK = [
+  "SQL",
+  "Oracle",
+  "Data Modeling",
+  "Dashboards",
+  "Business Intelligence",
   "React",
   "Node.js",
   "TypeScript",
-  "Oracle",
-  "SQL",
   "C++",
-  "Python",
-  "Linux",
   "Git",
-  "Bash",
+  "Linux",
 ];
 
 const INTERESTS = [
-  "Algoritmos",
-  "Machine Learning",
-  "Inteligencia Artificial",
+  "Business Intelligence",
+  "SQL",
+  "Modelado de datos",
+  "Dashboards",
   "Bases de datos",
+  "Optimizacion de consultas",
+  "Aplicaciones data-driven",
   "Algebra lineal",
-  "Sistemas embebidos",
-  "ICPC",
-  "GitHub Pages",
 ];
 
 const CONTACT_LINKS: ContactLink[] = [
@@ -159,9 +161,15 @@ const CONTACT_LINKS: ContactLink[] = [
   },
   {
     label: "Email",
-    detail: "Escribeme directo",
-    href: "mailto:hello@example.com",
+    detail: "gusharnisch2004@gmail.com",
+    href: "mailto:gusharnisch2004@gmail.com",
     icon: Mail,
+  },
+  {
+    label: "LinkedIn",
+    detail: "Gustavo Gallegos Harnisch",
+    href: "https://www.linkedin.com/in/gustavo-ivar-gallegos-harnisch/",
+    icon: Linkedin,
   },
 ];
 
@@ -307,15 +315,15 @@ function TerminalPreview() {
       </div>
       <pre className="m-0 whitespace-pre-wrap p-5 font-mono text-sm leading-7 text-[#e6edf6]">
         <span className="text-[#7dd3fc]">$</span> whoami{"\n"}
-        <span className="text-[#8a96aa]">gustavo - dev - CL</span>
+        <span className="text-[#8a96aa]">gustavo - ing. civil informatica - CL</span>
         {"\n"}
-        <span className="text-[#7dd3fc]">$</span> open /Horario/{"\n"}
-        <span className="text-[#8a96aa]">agenda universitaria lista</span>
+        <span className="text-[#7dd3fc]">$</span> cat focus.txt{"\n"}
+        <span className="text-[#8a96aa]">Business Intelligence - SQL - Data Models - Dashboards</span>
         {"\n"}
-        <span className="text-[#7dd3fc]">$</span> play /pong/{"\n"}
-        <span className="text-[#8a96aa]">canvas, paletas y pelota</span>
+        <span className="text-[#7dd3fc]">$</span> ls live-projects{"\n"}
+        <span className="text-[#8a96aa]">Horario/  pong/</span>
         {"\n"}
-        <span className="text-[#7dd3fc]">$</span> echo "let's build something" <span className="terminal-cursor">|</span>
+        <span className="text-[#7dd3fc]">$</span> echo "from raw data to decisions" <span className="terminal-cursor">|</span>
       </pre>
     </div>
   );
@@ -352,18 +360,19 @@ export default function Home() {
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-sm font-medium text-emerald-300">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
-              Disponible para proyectos y aprendizaje
+              Disponible para proyectos de datos
             </span>
 
             <h1 className="max-w-3xl text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
               Hola, soy <span className="gradient-text">Gustavo Harnisch</span>.
               <br />
-              Construyo software que <span className="soft-underline">simplemente funciona</span>.
+              Convierto datos en <span className="soft-underline">mejores decisiones</span>.
             </h1>
 
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[#8a96aa]">
-              Estudiante de Ingenieria Civil Informatica en la UCM, con interes en desarrollo full-stack,
-              bases de datos, algoritmos, aprendizaje automatico y sistemas que se pueden probar en el navegador.
+              Estudio Ingenieria Civil Informatica y me oriento al area de datos: Business Intelligence,
+              SQL y bases de datos. Me interesa crear consultas, modelos y dashboards que ayuden a entender
+              mejor la informacion.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -389,8 +398,8 @@ export default function Home() {
                 <span className="text-sm text-[#8a96aa]">Proyectos</span>
               </div>
               <div>
-                <strong className="block text-2xl font-bold text-white">4°</strong>
-                <span className="text-sm text-[#8a96aa]">Año UCM</span>
+                <strong className="block text-2xl font-bold text-white">Data / BI</strong>
+                <span className="text-sm text-[#8a96aa]">Enfoque</span>
               </div>
               <div>
                 <strong className="block text-2xl font-bold text-white">CL</strong>
@@ -426,12 +435,17 @@ export default function Home() {
             <Reveal>
               <article className="glass-panel p-7 md:p-9">
                 <p className="border-l-2 border-[#7dd3fc] pl-5 text-xl font-medium leading-8 text-white">
-                  "HELLO - probably I'm thinking about eating a Chilean hot dog."
+                  "Los datos cuentan historias; yo ayudo a escucharlas."
                 </p>
                 <p className="mt-6 leading-8 text-[#8a96aa]">
-                  Me gusta resolver problemas reales, integrar sistemas y aprender herramientas nuevas. En esta version
-                  del portafolio deje el foco en lo importante: quien soy, que estoy construyendo y acceso directo a los
-                  proyectos que ya viven en GitHub Pages.
+                  Soy estudiante de Ingenieria Civil Informatica y oriento mi carrera al area de datos:
+                  Business Intelligence, SQL y diseno de bases de datos. Disfruto tomar informacion cruda y
+                  transformarla en consultas claras, modelos bien pensados y dashboards que ayuden a tomar
+                  mejores decisiones.
+                </p>
+                <p className="mt-4 leading-8 text-[#8a96aa]">
+                  Mi base full-stack tambien me permite construir las aplicaciones que rodean a esos datos,
+                  desde el esquema en la base hasta la interfaz que los muestra.
                 </p>
                 <div className="mt-7 flex flex-wrap gap-2">
                   {STACK.map((item) => (
@@ -492,7 +506,7 @@ export default function Home() {
             <SectionHeading
               kicker="03 - Intereses"
               title="Donde estoy poniendo energia"
-              description="Una mezcla entre fundamentos academicos, software aplicado y experimentos que vale la pena tener cerca."
+              description="Data, BI y bases de datos como eje principal, con software aplicado alrededor para convertir informacion en accion."
             />
           </Reveal>
 
@@ -513,11 +527,11 @@ export default function Home() {
             <SectionHeading
               kicker="04 - Contacto"
               title="Las mejores formas de encontrarme"
-              description="GitHub queda como centro del portafolio, y la pagina mantiene accesos directos a lo publicado."
+              description="GitHub, correo y LinkedIn quedan a mano para proyectos, practicas o conversaciones sobre datos."
             />
           </Reveal>
 
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {CONTACT_LINKS.map((link, index) => {
               const Icon = link.icon;
               const external = link.href.startsWith("http");
