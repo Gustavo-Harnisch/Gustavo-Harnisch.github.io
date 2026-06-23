@@ -1,104 +1,188 @@
-/**
- * NEOBRUTALIST CODE LAB — Home Page (Mejorado)
- * Gustavo Harnisch Portfolio
- *
- * Design: Dark navy (#0a0e1a) + Cyan electric (#00d4ff) + Violet (#7c3aed)
- * Fonts: Syne (display) + JetBrains Mono (technical)
- * Layout: Sidebar nav + main content, asymmetric
- */
-
-import { type CSSProperties, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { motion, useInView } from "framer-motion";
+import {
+  ArrowRight,
+  CalendarDays,
+  Code2,
+  Cpu,
+  Database,
+  ExternalLink,
+  Gamepad2,
+  Github,
+  Globe2,
+  GraduationCap,
+  Mail,
+  MapPin,
+  Sparkles,
+  Terminal,
+  Trophy,
+  type LucideIcon,
+} from "lucide-react";
 
-// ─── Asset URLs ───────────────────────────────────────────────────────────────
 const AVATAR = "https://avatars.githubusercontent.com/u/138950084?v=4";
-const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663765016861/Qc9SkAovmdDdxbFUoCGYKs/hero-bg-TioiuV4CZRkU49A6Amq4ai.webp";
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
-const PROJECTS = [
+type NavItem = {
+  id: string;
+  label: string;
+};
+
+type Project = {
+  name: string;
+  description: string;
+  href: string;
+  language: string;
+  tags: string[];
+  icon: LucideIcon;
+  accent: string;
+  featured?: boolean;
+  local?: boolean;
+};
+
+type ContactLink = {
+  label: string;
+  detail: string;
+  href: string;
+  icon: LucideIcon;
+};
+
+const NAV_ITEMS: NavItem[] = [
+  { id: "about", label: "Sobre mi" },
+  { id: "projects", label: "Proyectos" },
+  { id: "interests", label: "Intereses" },
+  { id: "contact", label: "Contacto" },
+];
+
+const PROJECTS: Project[] = [
   {
     name: "Horario",
-    url: "/Horario/",
-    desc: "Horario universitario con datos en tiempo real, búsqueda avanzada y sincronización de calendario.",
-    icon: "📅",
-    color: "#f1e05a",
-    tags: ["HTML", "CSS", "JavaScript", "CSV"],
+    description:
+      "Horario universitario publicado en GitHub Pages, con datos desde CSV y una interfaz enfocada en consulta rapida.",
+    href: "/Horario/",
+    language: "HTML - CSS - JavaScript - CSV",
+    tags: ["Local", "CSV", "GitHub Pages"],
+    icon: CalendarDays,
+    accent: "#facc15",
+    featured: true,
+    local: true,
   },
   {
     name: "Pong",
-    url: "/pong/",
-    desc: "Juego clásico Pong remasterizado con canvas, física realista y controles responsivos.",
-    icon: "🎮",
-    color: "#61dafb",
-    tags: ["Canvas", "JavaScript", "Game Dev"],
+    description:
+      "Remake del clasico Pong en canvas, con controles simples y fisica de juego directa desde el navegador.",
+    href: "/pong/",
+    language: "Canvas - JavaScript",
+    tags: ["Local", "Game Dev", "Canvas"],
+    icon: Gamepad2,
+    accent: "#22d3ee",
+    featured: true,
+    local: true,
+  },
+  {
+    name: "CRUD Oracle",
+    description:
+      "Aplicacion full-stack con Oracle XE 21c, React y Node.js para practicar validaciones y persistencia real.",
+    href: "https://github.com/Gustavo-Harnisch/CRUD-oracle",
+    language: "PLSQL - React - Node.js",
+    tags: ["Full-stack", "Oracle", "React"],
+    icon: Database,
+    accent: "#fb7185",
+    featured: true,
+  },
+  {
+    name: "Portfolio Hub",
+    description:
+      "Repositorio principal que organiza el portafolio y publica proyectos estaticos desde GitHub Pages.",
+    href: "https://github.com/Gustavo-Harnisch/Gustavo-Harnisch.github.io",
+    language: "TypeScript - Vite",
+    tags: ["Portfolio", "Web", "Pages"],
+    icon: Globe2,
+    accent: "#a78bfa",
+  },
+  {
+    name: "SQL Class",
+    description:
+      "Ejercicios, scripts y practicas de bases de datos para reforzar consultas, modelos y fundamentos SQL.",
+    href: "https://github.com/Gustavo-Harnisch/sql_class",
+    language: "SQL",
+    tags: ["SQL", "DB", "Practica"],
+    icon: Code2,
+    accent: "#34d399",
+  },
+  {
+    name: "Arduino ESP32",
+    description:
+      "Exploracion de embebidos e IoT alrededor del core de Arduino para ESP32 y herramientas de bajo nivel.",
+    href: "https://github.com/Gustavo-Harnisch/arduino-esp32",
+    language: "C++",
+    tags: ["Embedded", "IoT", "C++"],
+    icon: Cpu,
+    accent: "#f97316",
   },
 ];
 
-const INTERESTS = [
-  { label: "Machine Learning", icon: "🧠", color: "#7c3aed" },
-  { label: "Inteligencia Artificial", icon: "🤖", color: "#00d4ff" },
-  { label: "Diseño de Algoritmos", icon: "⚡", color: "#00d4ff" },
-  { label: "Álgebra Lineal", icon: "∑", color: "#7c3aed" },
-  { label: "Ecuaciones Diferenciales", icon: "∂", color: "#00d4ff" },
-  { label: "Probabilidad y Estadística", icon: "📊", color: "#7c3aed" },
-];
-
 const STACK = [
-  { name: "Python", color: "#3572A5" },
-  { name: "C", color: "#555555" },
-  { name: "C++", color: "#f34b7d" },
-  { name: "Linux", color: "#89e051" },
-  { name: "Bash", color: "#89e051" },
-  { name: "React", color: "#61dafb" },
-  { name: "Node.js", color: "#3c873a" },
-  { name: "Oracle DB", color: "#e38c00" },
+  "React",
+  "Node.js",
+  "TypeScript",
+  "Oracle",
+  "SQL",
+  "C++",
+  "Python",
+  "Linux",
+  "Git",
+  "Bash",
 ];
 
-const NAV_ITEMS = [
-  { id: "hero", label: "inicio", icon: "~" },
-  { id: "projects", label: "proyectos", icon: ">" },
-  { id: "about", label: "sobre_mi", icon: "$" },
-  { id: "interests", label: "intereses", icon: "#" },
-  { id: "icpc", label: "icpc", icon: "!" },
-  { id: "contact", label: "contacto", icon: "@" },
+const INTERESTS = [
+  "Algoritmos",
+  "Machine Learning",
+  "Inteligencia Artificial",
+  "Bases de datos",
+  "Algebra lineal",
+  "Sistemas embebidos",
+  "ICPC",
+  "GitHub Pages",
 ];
 
-// ─── Typewriter Hook ──────────────────────────────────────────────────────────
-function useTypewriter(text: string, speed = 60, delay = 0) {
-  const [displayed, setDisplayed] = useState("");
-  const [done, setDone] = useState(false);
+const CONTACT_LINKS: ContactLink[] = [
+  {
+    label: "GitHub",
+    detail: "@Gustavo-Harnisch",
+    href: "https://github.com/Gustavo-Harnisch",
+    icon: Github,
+  },
+  {
+    label: "GitHub Pages",
+    detail: "gustavo-harnisch.github.io",
+    href: "https://gustavo-harnisch.github.io/",
+    icon: Globe2,
+  },
+  {
+    label: "Email",
+    detail: "Escribeme directo",
+    href: "mailto:hello@example.com",
+    icon: Mail,
+  },
+];
 
-  useEffect(() => {
-    let i = 0;
-    const timer = setTimeout(() => {
-      const interval = setInterval(() => {
-        if (i < text.length) {
-          setDisplayed(text.slice(0, i + 1));
-          i++;
-        } else {
-          setDone(true);
-          clearInterval(interval);
-        }
-      }, speed);
-      return () => clearInterval(interval);
-    }, delay);
-    return () => clearTimeout(timer);
-  }, [text, speed, delay]);
-
-  return { displayed, done };
-}
-
-// ─── Section Reveal ───────────────────────────────────────────────────────────
-function RevealSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
-  const ref = useRef(null);
+function Reveal({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 22 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1], delay }}
+      transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1], delay }}
       className={className}
     >
       {children}
@@ -106,610 +190,366 @@ function RevealSection({ children, className = "", delay = 0 }: { children: Reac
   );
 }
 
-// ─── Code Rain Background ─────────────────────────────────────────────────────
-function CodeRain() {
-  const snippets = [
-    "def dijkstra(graph, start):",
-    "import numpy as np",
-    "∂u/∂t = α∇²u",
-    "for i in range(n):",
-    "A·x = b",
-    "O(n log n)",
-    "class Graph:",
-    "#include <vector>",
-    "git commit -m",
-    "f(x) = Σ aₙxⁿ",
-    "while pq:",
-    "return result",
-    "λ = eigenvalue",
-    "∫f(x)dx",
-    "bool visited[N]",
-    "pip install torch",
-    "ollama run qwen",
-    "$ sudo apt install",
-    "SELECT * FROM",
-    "const [state, set]",
-  ];
-
+function Header({ activeSection }: { activeSection: string }) {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
-      {snippets.map((s, i) => (
-        <div
-          key={i}
-          className="absolute code-line"
-          style={{
-            left: `${(i * 5.1) % 100}%`,
-            top: `${(i * 7.3) % 100}%`,
-            transform: `rotate(${(i % 3 === 0 ? -2 : i % 3 === 1 ? 1 : -1)}deg)`,
-            opacity: 0.04 + (i % 4) * 0.01,
-            fontSize: `${0.6 + (i % 3) * 0.1}rem`,
-          }}
-        >
-          {s}
-        </div>
-      ))}
-    </div>
-  );
-}
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0a0d14]/80 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4 md:px-8">
+        <a href="#top" className="flex items-center gap-3 font-mono text-sm font-semibold text-white">
+          <span className="status-dot" aria-hidden="true" />
+          <span>gustavo.dev</span>
+        </a>
 
-// ─── Sidebar Navigation ───────────────────────────────────────────────────────
-function Sidebar({ active }: { active: string }) {
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+        <nav className="hidden items-center gap-6 md:flex" aria-label="Navegacion principal">
+          {NAV_ITEMS.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`text-sm font-medium transition-colors ${
+                activeSection === item.id ? "text-white" : "text-[#8a96aa] hover:text-white"
+              }`}
+              aria-current={activeSection === item.id ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
 
-  return (
-    <aside className="fixed left-0 top-0 h-full w-16 md:w-56 z-40 flex flex-col border-r border-[#1e293b] bg-[#0a0e1a]/95 backdrop-blur-sm">
-      {/* Logo */}
-      <div className="flex items-center justify-center md:justify-start gap-3 px-3 md:px-5 py-6 border-b border-[#1e293b]">
-        <div className="relative flex-shrink-0">
-          <img src={AVATAR} alt="Gustavo Harnisch" className="w-8 h-8 rounded-full border border-[#00d4ff]/30" />
-          <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#22c55e] border border-[#0a0e1a]" />
-        </div>
-        <div className="hidden md:block">
-          <div className="font-mono-brand text-xs text-[#00d4ff] font-bold">&lt;GH/&gt;</div>
-          <div className="font-mono-brand text-[10px] text-[#64748b]">Gustavo Harnisch</div>
-        </div>
-      </div>
-
-      {/* Nav */}
-      <nav className="flex-1 flex flex-col gap-1 p-2 md:p-3 mt-4">
-        {NAV_ITEMS.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => scrollTo(item.id)}
-            className={`flex items-center gap-3 px-2 md:px-3 py-2.5 rounded text-left transition-all duration-200 group ${
-              active === item.id
-                ? "bg-[#00d4ff]/10 text-[#00d4ff]"
-                : "text-[#64748b] hover:text-[#e2e8f0] hover:bg-[#1e293b]/50"
-            }`}
-          >
-            <span className="font-mono-brand text-sm w-4 text-center flex-shrink-0">{item.icon}</span>
-            <span className="hidden md:block font-mono-brand text-xs">{item.label}</span>
-            {active === item.id && (
-              <span className="hidden md:block ml-auto w-1 h-1 rounded-full bg-[#00d4ff]" />
-            )}
-          </button>
-        ))}
-      </nav>
-
-      {/* Footer */}
-      <div className="p-3 border-t border-[#1e293b]">
         <a
           href="https://github.com/Gustavo-Harnisch"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center md:justify-start gap-2 text-[#64748b] hover:text-[#00d4ff] transition-colors"
+          className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-medium text-[#e6edf6] transition hover:border-[#7dd3fc] hover:bg-[#7dd3fc]/10 hover:text-[#7dd3fc]"
         >
-          <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-          </svg>
-          <span className="hidden md:block font-mono-brand text-xs">GitHub</span>
+          <Github className="h-4 w-4" aria-hidden="true" />
+          GitHub
         </a>
       </div>
-    </aside>
+    </header>
   );
 }
 
-// ─── Main Component ───────────────────────────────────────────────────────────
+function SectionHeading({
+  kicker,
+  title,
+  description,
+}: {
+  kicker: string;
+  title: string;
+  description?: string;
+}) {
+  return (
+    <div className="mb-10 max-w-3xl">
+      <p className="mb-3 font-mono text-xs font-medium text-[#7dd3fc]">{kicker}</p>
+      <h2 className="text-3xl font-bold text-white md:text-4xl">{title}</h2>
+      {description && <p className="mt-3 max-w-2xl text-[#8a96aa]">{description}</p>}
+    </div>
+  );
+}
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const Icon = project.icon;
+  const external = project.href.startsWith("http");
+
+  return (
+    <Reveal delay={index * 0.06}>
+      <a
+        href={project.href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+        className="project-card-modern group block h-full p-6"
+        style={{ "--project-accent": project.accent } as CSSProperties}
+      >
+        <div className="mb-5 flex items-start justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 text-[color:var(--project-accent)]">
+              <Icon className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <div>
+              <h3 className="font-semibold text-white">{project.name}</h3>
+              <p className="font-mono text-xs text-[#8a96aa]">{project.language}</p>
+            </div>
+          </div>
+          <ExternalLink className="mt-1 h-4 w-4 flex-shrink-0 text-[#5a6679] transition group-hover:text-[color:var(--project-accent)]" />
+        </div>
+
+        <p className="mb-6 text-sm leading-6 text-[#8a96aa]">{project.description}</p>
+
+        <div className="mt-auto flex flex-wrap gap-2">
+          {project.featured && (
+            <span className="rounded-full border border-[color:var(--project-accent)]/40 bg-white/5 px-3 py-1 font-mono text-xs text-[color:var(--project-accent)]">
+              Destacado
+            </span>
+          )}
+          {project.local && (
+            <span className="rounded-full border border-emerald-300/30 bg-emerald-300/10 px-3 py-1 font-mono text-xs text-emerald-300">
+              En Pages
+            </span>
+          )}
+          {project.tags.map((tag) => (
+            <span key={tag} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-xs text-[#8a96aa]">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </a>
+    </Reveal>
+  );
+}
+
+function TerminalPreview() {
+  return (
+    <div className="glass-panel overflow-hidden">
+      <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-4 py-3">
+        <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+        <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+        <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+        <span className="ml-auto font-mono text-xs text-[#8a96aa]">~/gustavo</span>
+      </div>
+      <pre className="m-0 whitespace-pre-wrap p-5 font-mono text-sm leading-7 text-[#e6edf6]">
+        <span className="text-[#7dd3fc]">$</span> whoami{"\n"}
+        <span className="text-[#8a96aa]">gustavo - dev - CL</span>
+        {"\n"}
+        <span className="text-[#7dd3fc]">$</span> open /Horario/{"\n"}
+        <span className="text-[#8a96aa]">agenda universitaria lista</span>
+        {"\n"}
+        <span className="text-[#7dd3fc]">$</span> play /pong/{"\n"}
+        <span className="text-[#8a96aa]">canvas, paletas y pelota</span>
+        {"\n"}
+        <span className="text-[#7dd3fc]">$</span> echo "let's build something" <span className="terminal-cursor">|</span>
+      </pre>
+    </div>
+  );
+}
+
 export default function Home() {
-  const [activeSection, setActiveSection] = useState("hero");
+  const [activeSection, setActiveSection] = useState("top");
 
-  // Typewriter for hero
-  const line1 = useTypewriter("> Gustavo Harnisch", 55, 300);
-  const line2 = useTypewriter("Civil Computer Engineering", 45, 1400);
-  const line3 = useTypewriter("UCM · Talca, Chile", 50, 2600);
-
-  // Track active section
   useEffect(() => {
     const handleScroll = () => {
-      const sections = NAV_ITEMS.map((n) => n.id);
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el && window.scrollY >= el.offsetTop - 200) {
-          setActiveSection(sections[i]);
+      const sectionIds = ["top", ...NAV_ITEMS.map((item) => item.id)];
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const element = document.getElementById(sectionIds[i]);
+        if (element && window.scrollY >= element.offsetTop - 160) {
+          setActiveSection(sectionIds[i]);
           break;
         }
       }
     };
-    window.addEventListener("scroll", handleScroll);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0a0e1a] text-[#e2e8f0]">
-      <CodeRain />
-      <Sidebar active={activeSection} />
+    <div className="portfolio-page min-h-screen overflow-x-hidden bg-[#0a0d14] text-[#e6edf6]">
+      <div className="portfolio-grid-bg fixed inset-0 -z-10" aria-hidden="true" />
+      <Header activeSection={activeSection} />
 
-      {/* Main content offset for sidebar */}
-      <main className="ml-16 md:ml-56">
+      <main id="top" className="mx-auto max-w-6xl px-5 md:px-8">
+        <section className="grid min-h-[calc(100vh-73px)] items-center gap-12 py-14 md:py-20 lg:grid-cols-[1.15fr_0.85fr]">
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-sm font-medium text-emerald-300">
+              <Sparkles className="h-4 w-4" aria-hidden="true" />
+              Disponible para proyectos y aprendizaje
+            </span>
 
-        {/* ── HERO ────────────────────────────────────────────────────── */}
-        <section
-          id="hero"
-          className="relative min-h-screen flex flex-col justify-center overflow-hidden"
-        >
-          {/* Background image */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src={HERO_BG}
-              alt=""
-              className="w-full h-full object-cover opacity-30"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0e1a] via-[#0a0e1a]/80 to-[#0a0e1a]/40" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a] via-transparent to-transparent" />
-          </div>
+            <h1 className="max-w-3xl text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+              Hola, soy <span className="gradient-text">Gustavo Harnisch</span>.
+              <br />
+              Construyo software que <span className="soft-underline">simplemente funciona</span>.
+            </h1>
 
-          {/* Scan line effect */}
-          <div
-            className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-[#00d4ff]/20 to-transparent z-10 pointer-events-none"
-            style={{ animation: "scan 8s linear infinite", top: 0 }}
-          />
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-[#8a96aa]">
+              Estudiante de Ingenieria Civil Informatica en la UCM, con interes en desarrollo full-stack,
+              bases de datos, algoritmos, aprendizaje automatico y sistemas que se pueden probar en el navegador.
+            </p>
 
-          <div className="relative z-10 px-8 md:px-16 py-24 max-w-4xl">
-            {/* Status badge */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-              className="flex items-center gap-2 mb-8"
-            >
-              <span className="w-2 h-2 rounded-full bg-[#00d4ff] pulse-glow" />
-              <span className="font-mono-brand text-xs text-[#00d4ff] tracking-widest uppercase">
-                Working hard · 4° año · UCM
-              </span>
-            </motion.div>
-
-            {/* Typewriter lines */}
-            <div className="mb-6">
-              <h1 className="font-mono-brand text-3xl md:text-5xl lg:text-6xl font-bold text-[#00d4ff] glow-cyan-text mb-2">
-                {line1.displayed}
-                {!line1.done && <span className="cursor-blink">|</span>}
-              </h1>
-              <h2 className="font-display text-2xl md:text-4xl lg:text-5xl font-bold text-[#e2e8f0] mb-2">
-                {line2.displayed}
-                {line1.done && !line2.done && <span className="cursor-blink text-[#00d4ff]">|</span>}
-              </h2>
-              <p className="font-mono-brand text-lg md:text-xl text-[#64748b]">
-                {line3.displayed}
-                {line2.done && !line3.done && <span className="cursor-blink text-[#64748b]">|</span>}
-              </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#7dd3fc] to-[#a78bfa] px-5 py-3 text-sm font-semibold text-[#0a0d14] transition hover:-translate-y-0.5 hover:shadow-[0_14px_32px_-18px_#7dd3fc]"
+              >
+                Ver proyectos
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white transition hover:border-[#7dd3fc] hover:bg-white/[0.06]"
+              >
+                Contactarme
+                <Mail className="h-4 w-4" aria-hidden="true" />
+              </a>
             </div>
 
-            {/* Bio */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: line3.done ? 1 : 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-[#94a3b8] text-base md:text-lg max-w-2xl leading-relaxed mb-10 font-display"
-            >
-              Estudiante de Ingeniería Civil Informática con foco en algoritmos, aprendizaje automático
-              y matemáticas aplicadas. Me interesa entender los sistemas desde sus fundamentos —
-              tanto a nivel teórico como en su implementación práctica.
-            </motion.p>
+            <div className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-white/10 pt-6">
+              <div>
+                <strong className="block text-2xl font-bold text-white">{PROJECTS.length}</strong>
+                <span className="text-sm text-[#8a96aa]">Proyectos</span>
+              </div>
+              <div>
+                <strong className="block text-2xl font-bold text-white">4°</strong>
+                <span className="text-sm text-[#8a96aa]">Año UCM</span>
+              </div>
+              <div>
+                <strong className="block text-2xl font-bold text-white">CL</strong>
+                <span className="text-sm text-[#8a96aa]">Chile</span>
+              </div>
+            </div>
+          </motion.div>
 
-            {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: line3.done ? 1 : 0, y: line3.done ? 0 : 16 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-wrap gap-4"
-            >
-              <button
-                onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-                className="flex items-center gap-2 px-6 py-3 bg-[#00d4ff] text-[#0a0e1a] font-mono-brand font-bold text-sm rounded hover:bg-[#00d4ff]/90 transition-all duration-200 active:scale-95"
-              >
-                explorar proyectos →
-              </button>
-              <a
-                href="https://github.com/Gustavo-Harnisch"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 border border-[#1e293b] text-[#e2e8f0] font-mono-brand text-sm rounded hover:border-[#00d4ff]/40 hover:text-[#00d4ff] transition-all duration-200 active:scale-95"
-              >
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-                </svg>
-                GitHub
-              </a>
-            </motion.div>
-          </div>
-
-          {/* Scroll indicator */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 3.5 }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.12 }}
+            className="mx-auto w-full max-w-sm lg:max-w-md"
           >
-            <span className="font-mono-brand text-xs text-[#64748b]">scroll</span>
-            <motion.svg
-              animate={{ y: [0, 6, 0], opacity: [0.45, 1, 0.45] }}
-              transition={{ repeat: Infinity, duration: 1.5 }}
-              className="h-6 w-6 text-[#00d4ff]"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 9l6 6 6-6" />
-            </motion.svg>
+            <div className="relative">
+              <div className="avatar-ring-soft absolute left-1/2 top-0 h-44 w-44 -translate-x-1/2 rounded-full" aria-hidden="true" />
+              <img
+                src={AVATAR}
+                alt="Gustavo Harnisch"
+                className="relative z-10 mx-auto mb-6 h-40 w-40 rounded-full border border-white/20 bg-[#0e131c] object-cover shadow-2xl"
+              />
+              <TerminalPreview />
+            </div>
           </motion.div>
         </section>
 
-        {/* ── PROJECTS ────────────────────────────────────────────────── */}
-        <section id="projects" className="py-24 px-8 md:px-16 border-t border-[#1e293b]">
-          <RevealSection>
-            <div className="flex items-center gap-3 mb-12">
-              <span className="font-mono-brand text-[#00d4ff] text-sm">&gt;</span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold">Proyectos</h2>
-              <div className="flex-1 h-px bg-gradient-to-r from-[#1e293b] to-transparent ml-4" />
-            </div>
-          </RevealSection>
+        <section id="about" className="scroll-mt-24 py-16 md:py-20">
+          <Reveal>
+            <SectionHeading kicker="01 - Sobre mi" title="Un poco sobre quien soy" />
+          </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
-            {PROJECTS.map((project, i) => (
-              <RevealSection key={project.name} delay={i * 0.15}>
-                <a
-                  href={project.url}
-                  className="group block relative h-full"
-                >
-                  {/* Card */}
-                  <div
-                    className="project-card relative h-full border border-[#1e293b] rounded-lg p-8 bg-[#111827]/50 card-hover overflow-hidden"
-                    style={{ "--project-color": project.color } as CSSProperties}
-                  >
-                    {/* Gradient accent */}
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{
-                        background: `radial-gradient(circle at top right, ${project.color}15, transparent)`,
-                      }}
-                    />
+          <div className="grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
+            <Reveal>
+              <article className="glass-panel p-7 md:p-9">
+                <p className="border-l-2 border-[#7dd3fc] pl-5 text-xl font-medium leading-8 text-white">
+                  "HELLO - probably I'm thinking about eating a Chilean hot dog."
+                </p>
+                <p className="mt-6 leading-8 text-[#8a96aa]">
+                  Me gusta resolver problemas reales, integrar sistemas y aprender herramientas nuevas. En esta version
+                  del portafolio deje el foco en lo importante: quien soy, que estoy construyendo y acceso directo a los
+                  proyectos que ya viven en GitHub Pages.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-2">
+                  {STACK.map((item) => (
+                    <span key={item} className="skill-pill">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            </Reveal>
 
-                    {/* Content */}
-                    <div className="relative z-10">
-                      {/* Icon + Title */}
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <div className="text-4xl mb-3">{project.icon}</div>
-                          <h3 className="font-display text-2xl font-bold text-[#e2e8f0] group-hover:text-[#00d4ff] transition-colors">
-                            {project.name}
-                          </h3>
-                        </div>
-                        <svg className="w-5 h-5 text-[#64748b] group-hover:text-[#00d4ff] transition-colors flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-[#94a3b8] text-sm leading-relaxed mb-6 font-display">
-                        {project.desc}
-                      </p>
-
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="tech-badge text-xs"
-                            style={{
-                              borderColor: `${project.color}40`,
-                              color: project.color,
-                              background: `${project.color}08`,
-                            }}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Bottom accent line */}
-                      <div
-                        className="absolute bottom-0 left-0 h-0.5 w-0 group-hover:w-full transition-all duration-500"
-                        style={{ background: project.color }}
-                      />
-                    </div>
+            <Reveal delay={0.08}>
+              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+                <div className="glass-panel flex items-center gap-4 p-5">
+                  <GraduationCap className="h-6 w-6 text-[#7dd3fc]" aria-hidden="true" />
+                  <div>
+                    <strong className="block text-white">UCM</strong>
+                    <span className="text-sm text-[#8a96aa]">Ing. Civil Informatica</span>
                   </div>
-                </a>
-              </RevealSection>
+                </div>
+                <div className="glass-panel flex items-center gap-4 p-5">
+                  <MapPin className="h-6 w-6 text-[#34d399]" aria-hidden="true" />
+                  <div>
+                    <strong className="block text-white">Talca</strong>
+                    <span className="text-sm text-[#8a96aa]">Chile</span>
+                  </div>
+                </div>
+                <div className="glass-panel flex items-center gap-4 p-5">
+                  <Trophy className="h-6 w-6 text-[#facc15]" aria-hidden="true" />
+                  <div>
+                    <strong className="block text-white">ICPC</strong>
+                    <span className="text-sm text-[#8a96aa]">Competencia algoritmica</span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <section id="projects" className="scroll-mt-24 py-16 md:py-20">
+          <Reveal>
+            <SectionHeading
+              kicker="02 - Proyectos"
+              title="Cosas que he construido"
+              description="Las primeras tarjetas son los proyectos que querias conservar en esta nueva configuracion de GitHub Pages."
+            />
+          </Reveal>
+
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {PROJECTS.map((project, index) => (
+              <ProjectCard key={project.name} project={project} index={index} />
             ))}
           </div>
         </section>
 
-        {/* ── ABOUT ───────────────────────────────────────────────────── */}
-        <section id="about" className="py-24 px-8 md:px-16 border-t border-[#1e293b]">
-          <RevealSection>
-            <div className="flex items-center gap-3 mb-12">
-              <span className="font-mono-brand text-[#00d4ff] text-sm">$</span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold">Sobre mí</h2>
-              <div className="flex-1 h-px bg-gradient-to-r from-[#1e293b] to-transparent ml-4" />
-            </div>
-          </RevealSection>
+        <section id="interests" className="scroll-mt-24 py-16 md:py-20">
+          <Reveal>
+            <SectionHeading
+              kicker="03 - Intereses"
+              title="Donde estoy poniendo energia"
+              description="Una mezcla entre fundamentos academicos, software aplicado y experimentos que vale la pena tener cerca."
+            />
+          </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-12 items-start max-w-4xl">
-            <RevealSection delay={0.1}>
-              <div className="space-y-6">
-                <div className="border border-[#1e293b] rounded-lg p-6 bg-[#111827]/50 card-hover">
-                  <div className="font-mono-brand text-xs text-[#64748b] mb-3">// perfil.json</div>
-                  <pre className="font-mono-brand text-sm text-[#e2e8f0] leading-relaxed overflow-x-auto">
-{`{
-  "nombre": "Gustavo Harnisch",
-  "rol": "Civil Computer Engineering",
-  "universidad": "UCM",
-  "ciudad": "Talca, Chile",
-  "año": "4° año",
-  "enfoque": [
-    "Algoritmos",
-    "Machine Learning",
-    "Matemáticas Aplicadas"
-  ],
-  "estado": "Working hard 🌱"
-}`}
-                  </pre>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {INTERESTS.map((interest, index) => (
+              <Reveal key={interest} delay={index * 0.04}>
+                <div className="interest-tile flex min-h-24 items-center justify-between gap-4 p-5">
+                  <span className="font-medium text-white">{interest}</span>
+                  <Terminal className="h-4 w-4 flex-shrink-0 text-[#7dd3fc]" aria-hidden="true" />
                 </div>
-
-                <div className="border border-[#1e293b] rounded-lg p-6 bg-[#111827]/50 card-hover">
-                  <div className="font-mono-brand text-xs text-[#64748b] mb-3">// enfoque_academico.md</div>
-                  <p className="text-[#94a3b8] text-sm leading-relaxed font-display">
-                    Las matemáticas son una herramienta para entender, modelar y construir sistemas.
-                    Mi foco está en conectar fundamentos como álgebra lineal, estadística y algoritmos
-                    con implementaciones prácticas en ingeniería y aprendizaje automático.
-                  </p>
-                </div>
-              </div>
-            </RevealSection>
-
-            <RevealSection delay={0.2}>
-              <div className="space-y-6">
-                {/* Stack */}
-                <div className="border border-[#1e293b] rounded-lg p-6 bg-[#111827]/50 card-hover">
-                  <div className="font-mono-brand text-xs text-[#64748b] mb-4">// stack.sh</div>
-                  <div className="flex flex-wrap gap-2">
-                    {STACK.map((tech) => (
-                      <span
-                        key={tech.name}
-                        className="tech-badge"
-                        style={{ borderColor: `${tech.color}40`, color: tech.color, background: `${tech.color}08` }}
-                      >
-                        {tech.name}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="border border-[#1e293b] rounded-lg p-5 bg-[#111827]/50 text-center card-hover">
-                    <div className="font-mono-brand text-3xl font-bold text-[#00d4ff] glow-cyan-text">4x</div>
-                    <div className="font-mono-brand text-xs text-[#64748b] mt-1">ICPC</div>
-                  </div>
-                  <div className="border border-[#1e293b] rounded-lg p-5 bg-[#111827]/50 text-center card-hover">
-                    <div className="font-mono-brand text-3xl font-bold text-[#7c3aed]">8</div>
-                    <div className="font-mono-brand text-xs text-[#64748b] mt-1">repositorios</div>
-                  </div>
-                  <div className="border border-[#1e293b] rounded-lg p-5 bg-[#111827]/50 text-center card-hover">
-                    <div className="font-mono-brand text-3xl font-bold text-[#00d4ff] glow-cyan-text">165</div>
-                    <div className="font-mono-brand text-xs text-[#64748b] mt-1">contribuciones / año</div>
-                  </div>
-                  <div className="border border-[#1e293b] rounded-lg p-5 bg-[#111827]/50 text-center card-hover">
-                    <div className="font-mono-brand text-3xl font-bold text-[#7c3aed]">∞</div>
-                    <div className="font-mono-brand text-xs text-[#64748b] mt-1">curiosidad</div>
-                  </div>
-                </div>
-              </div>
-            </RevealSection>
-          </div>
-        </section>
-
-        {/* ── INTERESTS ───────────────────────────────────────────────── */}
-        <section id="interests" className="py-24 px-8 md:px-16 border-t border-[#1e293b]">
-          <RevealSection>
-            <div className="flex items-center gap-3 mb-12">
-              <span className="font-mono-brand text-[#7c3aed] text-sm">#</span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold">Áreas de Interés</h2>
-              <div className="flex-1 h-px bg-gradient-to-r from-[#1e293b] to-transparent ml-4" />
-            </div>
-          </RevealSection>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl">
-            {INTERESTS.map((item, i) => (
-              <RevealSection key={item.label} delay={i * 0.08}>
-                <div
-                  className="border border-[#1e293b] rounded-lg p-6 bg-[#111827]/70 card-hover group cursor-default"
-                  style={{ borderColor: `${item.color}20` }}
-                >
-                  <div
-                    className="text-3xl mb-3 font-mono-brand"
-                    style={{ color: item.color }}
-                  >
-                    {item.icon}
-                  </div>
-                  <div className="font-display font-semibold text-[#e2e8f0] group-hover:text-white transition-colors">
-                    {item.label}
-                  </div>
-                  <div
-                    className="mt-2 h-px w-0 group-hover:w-full transition-all duration-500"
-                    style={{ background: `linear-gradient(to right, ${item.color}60, transparent)` }}
-                  />
-                </div>
-              </RevealSection>
+              </Reveal>
             ))}
           </div>
         </section>
 
-        {/* ── ICPC ────────────────────────────────────────────────────── */}
-        <section id="icpc" className="py-24 px-8 md:px-16 border-t border-[#1e293b]">
-          <RevealSection>
-            <div className="flex items-center gap-3 mb-12">
-              <span className="font-mono-brand text-[#00d4ff] text-sm">!</span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold">Competencia Algorítmica</h2>
-              <div className="flex-1 h-px bg-gradient-to-r from-[#1e293b] to-transparent ml-4" />
-            </div>
-          </RevealSection>
+        <section id="contact" className="scroll-mt-24 py-16 md:py-20">
+          <Reveal>
+            <SectionHeading
+              kicker="04 - Contacto"
+              title="Las mejores formas de encontrarme"
+              description="GitHub queda como centro del portafolio, y la pagina mantiene accesos directos a lo publicado."
+            />
+          </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-8 items-center max-w-4xl">
-            <RevealSection delay={0.1}>
-              <div className="space-y-6">
-                <div className="border border-[#00d4ff]/20 rounded-lg p-6 bg-[#111827]/80 glow-cyan">
-                  <table className="w-full font-mono-brand text-sm">
-                    <tbody>
-                      <tr className="border-b border-[#1e293b]">
-                        <td className="py-3 text-[#64748b]">Competición</td>
-                        <td className="py-3 text-[#00d4ff] font-bold text-right">ICPC</td>
-                      </tr>
-                      <tr className="border-b border-[#1e293b]">
-                        <td className="py-3 text-[#64748b]">Participaciones</td>
-                        <td className="py-3 text-[#e2e8f0] text-right">4 veces</td>
-                      </tr>
-                      <tr>
-                        <td className="py-3 text-[#64748b]">Representando</td>
-                        <td className="py-3 text-[#e2e8f0] text-right">UCM</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {CONTACT_LINKS.map((link, index) => {
+              const Icon = link.icon;
+              const external = link.href.startsWith("http");
 
-                <blockquote className="border-l-2 border-[#00d4ff] pl-4">
-                  <p className="font-display text-[#94a3b8] italic text-sm leading-relaxed">
-                    "No compito para ganar medallas — todavía. El objetivo es claro: llegar al podio
-                    representando a la UCM. Cada contest es un paso hacia eso."
-                  </p>
-                </blockquote>
-              </div>
-            </RevealSection>
-
-            <RevealSection delay={0.2}>
-              <div className="border border-[#1e293b] rounded-lg p-6 bg-[#111827]/70 card-hover">
-                <div className="font-mono-brand text-xs text-[#64748b] mb-4">// icpc_mindset.py</div>
-                <pre className="font-mono-brand text-xs text-[#e2e8f0] leading-relaxed overflow-x-auto">
-{`class ICPCCompetitor:
-    def __init__(self):
-        self.university = "UCM"
-        self.participations = 4
-        self.goal = "podio"
-    
-    def compete(self, contest):
-        strategy = self.analyze(contest)
-        solution = self.implement(strategy)
-        return self.submit(solution)
-    
-    def analyze(self, problem):
-        return optimal_approach(problem)
-    
-    # En progreso...
-    def reach_podio(self):
-        while not self.at_podio():
-            self.practice()
-            self.learn()
-            self.compete()`}
-                </pre>
-              </div>
-            </RevealSection>
+              return (
+                <Reveal key={link.label} delay={index * 0.06}>
+                  <a
+                    href={link.href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    className="contact-card group flex h-full items-center gap-4 p-5"
+                  >
+                    <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 text-[#7dd3fc]">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <span className="min-w-0">
+                      <strong className="block text-sm text-white">{link.label}</strong>
+                      <span className="block truncate text-sm text-[#8a96aa]">{link.detail}</span>
+                    </span>
+                    <ExternalLink className="ml-auto h-4 w-4 flex-shrink-0 text-[#5a6679] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#7dd3fc]" />
+                  </a>
+                </Reveal>
+              );
+            })}
           </div>
         </section>
-
-        {/* ── CONTACT ─────────────────────────────────────────────────── */}
-        <section id="contact" className="py-24 px-8 md:px-16 border-t border-[#1e293b]">
-          <RevealSection>
-            <div className="flex items-center gap-3 mb-12">
-              <span className="font-mono-brand text-[#7c3aed] text-sm">@</span>
-              <h2 className="font-display text-3xl md:text-4xl font-bold">Contacto</h2>
-              <div className="flex-1 h-px bg-gradient-to-r from-[#1e293b] to-transparent ml-4" />
-            </div>
-          </RevealSection>
-
-          <div className="max-w-2xl">
-            <RevealSection delay={0.1}>
-              <div className="border border-[#1e293b] rounded-lg p-8 bg-[#111827]/50 card-hover">
-                <div className="font-mono-brand text-xs text-[#64748b] mb-6">$ cat contact.md</div>
-
-                <div className="space-y-4">
-                  <a
-                    href="https://github.com/Gustavo-Harnisch"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 rounded border border-[#1e293b] hover:border-[#00d4ff]/30 hover:bg-[#00d4ff]/5 transition-all group"
-                  >
-                    <svg className="w-5 h-5 text-[#64748b] group-hover:text-[#00d4ff] transition-colors flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-                    </svg>
-                    <div>
-                      <div className="font-mono-brand text-sm text-[#e2e8f0] group-hover:text-[#00d4ff] transition-colors">
-                        github.com/Gustavo-Harnisch
-                      </div>
-                      <div className="font-mono-brand text-xs text-[#64748b]">GitHub Profile</div>
-                    </div>
-                    <svg className="w-4 h-4 text-[#64748b] group-hover:text-[#00d4ff] ml-auto transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-
-                  <a
-                    href="https://gustavo-harnisch.github.io/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 rounded border border-[#1e293b] hover:border-[#7c3aed]/30 hover:bg-[#7c3aed]/5 transition-all group"
-                  >
-                    <svg className="w-5 h-5 text-[#64748b] group-hover:text-[#7c3aed] transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                    </svg>
-                    <div>
-                      <div className="font-mono-brand text-sm text-[#e2e8f0] group-hover:text-[#7c3aed] transition-colors">
-                        gustavo-harnisch.github.io
-                      </div>
-                      <div className="font-mono-brand text-xs text-[#64748b]">GitHub Pages</div>
-                    </div>
-                    <svg className="w-4 h-4 text-[#64748b] group-hover:text-[#7c3aed] ml-auto transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                </div>
-
-                <div className="mt-8 pt-6 border-t border-[#1e293b]">
-                  <p className="font-mono-brand text-xs text-[#64748b]">
-                    <span className="text-[#00d4ff]">HELLO</span> I'm probably thinking about eating a Chilean hot dog.
-                  </p>
-                </div>
-              </div>
-            </RevealSection>
-          </div>
-        </section>
-
-        {/* ── FOOTER ──────────────────────────────────────────────────── */}
-        <footer className="py-8 px-8 md:px-16 border-t border-[#1e293b]">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <span className="font-mono-brand text-xs text-[#64748b]">
-                Gustavo Harnisch · UCM · Talca, Chile
-              </span>
-            </div>
-            <div className="font-mono-brand text-xs text-[#64748b]">
-              <span className="text-[#00d4ff]">4°</span> año · Ing. Civil Informática
-            </div>
-          </div>
-        </footer>
       </main>
+
+      <footer className="mx-auto flex max-w-6xl flex-col gap-2 border-t border-white/10 px-5 py-8 text-sm text-[#8a96aa] md:flex-row md:items-center md:justify-between md:px-8">
+        <span>© {new Date().getFullYear()} Gustavo Harnisch</span>
+        <span>Hecho con React, Vite y GitHub Pages.</span>
+      </footer>
     </div>
   );
 }
